@@ -1,0 +1,171 @@
+<div
+  class="af-form-elements af-component {{ cssClass }} {{
+    inline ? 'inline' : ''
+  }} container-fluid"
+>
+  <form class="generated-form-element row">
+    <ng-container *ngFor="let group of elements">
+      <div *ngIf="group.visible !== false" class="{{ columnSize(group) }}">
+        <div class="panel panel-white">
+          <div *ngIf="group.title" class="panel-heading">
+            <h3 class="panel-title">
+              {{ group.title | translate: true }}&nbsp;
+            </h3>
+          </div>
+          <div class="row panel-body">
+            <ng-container *ngFor="let element of group.elements">
+              <div
+                class="form-element-item form-group col-12 {{
+                  element.params.cssClass || element.config.cssClass || ''
+                }} {{
+                  element.validation &&
+                  element.validation.errors &&
+                  element.validation.errors.length
+                    ? 'has-error'
+                    : ''
+                }}"
+                *ngIf="element.config.visible !== false"
+                [ngSwitch]="element.type"
+              >
+                <label *ngIf="element.config.hideLabel !== true">
+                  {{ element.config.label | translate: true }}
+                </label>
+
+                <!-- Verification -->
+                <ng-container
+                  *ngIf="element.type === FormElementType.Verification"
+                >
+                  <app-phone-verification
+                    [cssClass]="element.config.cssClass"
+                    [disabled]="checkDisabled(group, element)"
+                    [(model)]="element.params.model"
+                  ></app-phone-verification>
+                </ng-container>
+
+                <!-- Button -->
+                <ng-container *ngIf="element.type === FormElementType.Button">
+                  <div>
+                    <span *ngIf="element.params.model" class="button-label">
+                      {{ element.params.model }}
+                    </span>
+                    <span
+                      *ngIf="
+                        !element.params.model && element.params.requireModel
+                      "
+                      class="button-label"
+                    >
+                      {{ 'NONE_PROVIDED' | translate }}
+                    </span>
+                    <button
+                      [disabled]="checkDisabled(group, element)"
+                      (click)="element.params.action($event)"
+                      mat-stroked-button
+                    >
+                      {{ element.params.label | translate }}
+                    </button>
+                  </div>
+                </ng-container>
+
+                <!-- Label -->
+                <ng-container *ngIf="element.type === FormElementType.Label">
+                  <label class="label-value">{{
+                    element.params.label | translate: true
+                  }}</label>
+                </ng-container>
+
+                <!-- Checkbox -->
+                <ng-container *ngIf="element.type === FormElementType.Checkbox">
+                  <app-checkbox
+                    [cssClass]="element.config.cssClass"
+                    [disabled]="checkDisabled(group, element)"
+                    [(model)]="element.params.model"
+                    [summary]="element.params.summary"
+                    [label]="element.params.label"
+                  ></app-checkbox>
+                </ng-container>
+
+                <!-- Captcha -->
+                <ng-container *ngIf="element.type === FormElementType.Captcha">
+                  <app-captcha
+                    [cssClass]="element.config.cssClass"
+                    [disabled]="checkDisabled(group, element)"
+                    [(model)]="element.params.model"
+                  ></app-captcha>
+                </ng-container>
+
+                <!-- Input -->
+                <ng-container *ngIf="element.type === FormElementType.Input">
+                  <app-input
+                    [growable]="element.params.growable"
+                    [appendIcon]="element.params.appendIcon"
+                    [prependIcon]="element.params.prependIcon"
+                    [label]="element.params.label"
+                    [ltr]="element.params.ltr"
+                    [autofocus]="element.params.autofocus"
+                    [placeHolder]="element.params.placeHolder"
+                    [rows]="element.params.rows"
+                    [cssClass]="element.config.cssClass"
+                    [textArea]="element.params.textArea"
+                    [numeric]="element.params.numeric"
+                    [readonly]="element.params.readonly"
+                    [password]="element.params.password"
+                    [disabled]="checkDisabled(group, element)"
+                    [(model)]="element.params.model"
+                  ></app-input>
+                </ng-container>
+
+                <!-- DropDown -->
+                <ng-container *ngIf="element.type === FormElementType.DropDown">
+                  <app-dropdown
+                    [cssClass]="element.config.cssClass"
+                    [disabled]="checkDisabled(group, element)"
+                    [(model)]="element.params.model"
+                    [(items)]="element.params.items"
+                    [ltr]="element.params.ltr"
+                    [allowClear]="element.params.allowClear"
+                    [backend]="element.params.backend"
+                    [backendParams]="element.params.backendParams"
+                    [choose]="element.params.choose"
+                    [chooseLabel]="element.params.chooseLabel"
+                    [enum]="element.params.enum"
+                    [enumExcept]="element.params.enumExcept"
+                    [knownList]="element.params.knownList"
+                    [prependIcon]="element.params.prependIcon"
+                    [waiting]="element.params.waiting"
+                  ></app-dropdown>
+                </ng-container>
+
+                <app-validation
+                  [model]="element.validation.errors"
+                ></app-validation>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </form>
+
+  <div *ngIf="standalone !== true" class="actions">
+    <button
+      [disabled]="actionWaiting || cancelWaiting"
+      *ngIf="actionLabel"
+      (click)="action.emit()"
+      mat-flat-button
+      color="primary"
+    >
+      <i *ngIf="actionWaiting" class="icon-spinner2 icon-spin"></i>
+      {{ actionLabel | translate }}
+    </button>
+    &nbsp;
+    <button
+      [disabled]="actionWaiting || cancelWaiting"
+      *ngIf="allowCancel"
+      (click)="cancel.emit()"
+      mat-stroked-button
+    >
+      <i *ngIf="cancelWaiting" class="fa fa-spinner fa-spin"></i>
+      {{ cancelLabel || 'CANCEL' | translate }}
+    </button>
+  </div>
+</div>

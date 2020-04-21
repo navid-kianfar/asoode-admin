@@ -1,0 +1,34 @@
+<div class="af-dropdown af-component dropdown {{ cssClass }}">
+  <button
+    [matMenuTriggerFor]="menu"
+    [disabled]="disabled || waiting"
+    [class.focus]="showPlate"
+    class="btn btn-default dropdown-toggle"
+    type="button"
+  >
+    <span *ngIf="prependIcon" class="prepend-icon">
+      <i class="{{ prependIcon }}"></i>
+    </span>
+    <span class="txt" [class.ltr]="ltr && model !== undefined">{{
+      text | translate: true
+    }}</span>
+    <span class="arrow icon-arrow-down2"></span>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item *ngIf="!items.length">
+      {{ 'LIST_EMPTY' | translate }}
+    </button>
+    <button
+      mat-menu-item
+      [class.ltr]="ltr"
+      [class.has-description]="item.description"
+      *ngFor="let item of items"
+      (click)="onPick(item, $event, true)"
+    >
+      <span class="title">{{ item.text | translate: true }}</span>
+      <span *ngIf="item.description" class="sub-title">
+        {{ item.description | translate: true }}
+      </span>
+    </button>
+  </mat-menu>
+</div>

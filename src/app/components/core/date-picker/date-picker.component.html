@@ -1,0 +1,30 @@
+<div class="af-date-picker {{ cssClass }}">
+  <div class="input-wrapper" [class.empty-date]="!formattedDate">
+    <input
+      readonly
+      [disabled]="disabled"
+      class="date"
+      type="text"
+      [value]="formattedDate"
+      [popper]="popperDatePicker"
+      [popperTrigger]="'click'"
+      [popperHideOnClickOutside]="true"
+      [popperHideOnScroll]="true"
+      [popperPlacement]="'bottom'"
+    />
+  </div>
+  <popper-content #popperDatePicker>
+    <div class="date-picker-plate">
+      <app-calendar
+        (formattedDate)="setFormattedDate($event)"
+        (modelChange)="update($event, popperDatePicker)"
+        [model]="model"
+        [pickButton]="pickButton"
+        [allowNull]="allowNull"
+        [disabled]="disabled"
+        [from]="from"
+        [to]="to"
+      ></app-calendar>
+    </div>
+  </popper-content>
+</div>

@@ -1,0 +1,22 @@
+.af-textbox {
+  input,
+  textarea {
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    padding: 5px;
+    resize: none;
+    width: 100%;
+  }
+
+  &.focus {
+    input {
+      border: 1px solid #80bdff;
+    }
+  }
+  &.ltr {
+    input {
+      text-align: left !important;
+      direction: ltr !important;
+    }
+  }
+}
