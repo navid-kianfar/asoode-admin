@@ -21,6 +21,7 @@ import {
   MatTable,
   MatTableDataSource,
 } from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-grid',
@@ -54,7 +55,7 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
   @Output() totalPagesChange = new EventEmitter<number>();
   @Output() totalItemsChange = new EventEmitter<number>();
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatTable, { static: true }) table: MatTable<T>;
   @ContentChildren(MatColumnDef) columnDefs: QueryList<MatColumnDef>;
 
@@ -65,11 +66,7 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
 
   ngOnInit() {
     if (this.showFooter !== false) {
-      this.paginator.pageSizeOptions = [10, 20];
-      this.paginator.pageIndex = 0;
-      this.paginator.pageSize = 10;
-      this.translatorService.paginator(this.paginator);
-      this.dataSource.paginator = this.paginator;
+      this.currentPage = 1;
       if (this.rowHeight === undefined) {
         this.rowHeight = 30;
       }
@@ -130,12 +127,10 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
     }
     this.currentPage = page;
     this.currentPageChange.emit(page);
-    await this.updateDataSource();
+    await this.updateDataSource(true);
   }
 
-  async updateDataSource() {
-    this.dataSource.data = this.rows || [];
-
+  async updateDataSource(pageChanged: boolean = false) {
     if (!this.backend) {
       return;
     }
@@ -144,8 +139,8 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
     const op = await this.httpService.grid<T>({
       backend: this.backend,
       params: this.backendParams,
-      page: this.currentPage,
-      pageSize: this.pageSize,
+      page: this.currentPage || 1,
+      pageSize: this.pageSize || 10
     });
     this.isLoading = false;
     this.isLoadingChange.emit(this.isLoading);
@@ -153,11 +148,16 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
       // TODO: handle error;
       return;
     }
+
     this.totalItems = op.data.totalItems;
     this.totalPages = op.data.totalPages;
-    this.rows = op.data.items;
+
+    this.dataSource.data = op.data.items;
+
+
+    console.log(this.dataSource.data, this.dataSource.paginator);
     this.totalItemsChange.emit(this.totalItems);
-    this.rowsChange.emit(this.rows);
+    this.rowsChange.emit(op.data.items);
     this.totalPagesChange.emit(this.totalPages);
   }
 }

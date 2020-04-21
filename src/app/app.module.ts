@@ -86,6 +86,11 @@ import { TimeSpanComponent } from './components/core/time-span/time-span.compone
 import { NumberComponent } from './components/core/number/number.component';
 import { TimePickerComponent } from './components/core/time-picker/time-picker.component';
 import { HeaderComponent } from './components/app/header/header.component';
+import { UsersComponent } from './pages/users/users.component';
+import { BlogComponent } from './pages/blog/blog.component';
+import { CmsComponent } from './pages/cms/cms.component';
+import { PlansComponent } from './pages/plans/plans.component';
+import { TransactionsComponent } from './pages/transactions/transactions.component';
 
 @NgModule({
   declarations: [
@@ -138,6 +143,11 @@ import { HeaderComponent } from './components/app/header/header.component';
     NumberComponent,
     TimePickerComponent,
     HeaderComponent,
+    UsersComponent,
+    BlogComponent,
+    CmsComponent,
+    PlansComponent,
+    TransactionsComponent,
   ],
   entryComponents: [
     ConfirmComponent,

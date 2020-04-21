@@ -4,6 +4,11 @@ import { DashboardComponent } from './pages/reports/dashboard/dashboard.componen
 import { LoginComponent } from './pages/auth/login/login.component';
 import { AnonymousGuard } from './guards/anonymous.guard';
 import { AuthGuard } from './guards/auth.guard';
+import { BlogComponent } from './pages/blog/blog.component';
+import { CmsComponent } from './pages/cms/cms.component';
+import { PlansComponent } from './pages/plans/plans.component';
+import { TransactionsComponent } from './pages/transactions/transactions.component';
+import { UsersComponent } from './pages/users/users.component';
 
 const routes: Routes = [
   {
@@ -14,6 +19,31 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'blog',
+    component: BlogComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'cms',
+    component: CmsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'plans',
+    component: PlansComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'transactions',
+    component: TransactionsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'users',
+    component: UsersComponent,
     canActivate: [AuthGuard],
   },
   { path: '**', redirectTo: 'dashboard' },

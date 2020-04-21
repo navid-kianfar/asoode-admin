@@ -431,6 +431,7 @@ quill-editor[dir='rtl'] {
 }
 
 body {
+  background: #f2f2f2;
   .modal {
     display: none;
     position: fixed;
@@ -544,111 +545,17 @@ body {
 }
 
 .mat-table {
-  th.mat-header-cell {
-    background-color: #f2f2f2 !important;
-    color: #999999 !important;
-    font-size: 0.7rem;
-    font-weight: 400;
-  }
+  //th.mat-header-cell {
+  //  background-color: #f2f2f2 !important;
+  //  color: #999999 !important;
+  //  font-size: 0.7rem;
+  //  font-weight: 400;
+  //}
 }
-/* Animate items as they're being sorted. */
-.cdk-drop-list-dragging .cdk-drag {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
-
-/* Animate an item that has been dropped. */
-.cdk-drag-animating {
-  transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
-}
-.cdk-drag-placeholder {
-  opacity: 0;
-}
-.cdk-drag-preview {
-  z-index: 1050 !important;
-}
-
-.ngxp__container {
-  box-shadow: none !important;
-}
-.mat-menu-panel {
-  max-width: 300px !important;
-  &.popper-all-users,
-  &.popper-task-labels {
-    max-width: 350px !important;
-    width: 350px !important;
-  }
-}
-.task-modal-labels-menu {
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-
-    li {
-      .label {
-        display: flex;
-        background: #f2f2f2;
-        align-items: center;
-        padding: 5px 10px;
-        border-radius: 5px;
-        margin: 0 5px 5px;
-        border: 1px solid transparent;
-        cursor: pointer;
-
-        &.selected {
-          border: 1px solid #59a8ef;
-        }
-
-        .title {
-          display: flex;
-          flex-grow: 1;
-          margin-inline-end: 10px;
-
-          span {
-            font-size: 0.7rem;
-            color: #fff;
-            font-weight: 400;
-            padding: 2px 5px;
-            border-radius: 5px;
-          }
-
-          input {
-            border: 1px solid #e0e0e0;
-            border-radius: 5px;
-            padding: 2px 5px;
-            font-size: 0.8rem;
-            font-weight: 400;
-            margin-inline-end: 5px;
-            width: 280px;
-          }
-          i {
-            justify-content: center;
-            align-items: center;
-          }
-        }
-        i {
-          display: flex;
-          margin-inline-end: 10px;
-          width: 20px;
-          height: 20px;
-        }
-      }
-    }
-  }
-}
-.task-modal-members-menu {
-  ul {
-    margin: 0;
-    padding: 0 5px;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-
-    li {
-      cursor: pointer;
-      margin-bottom: 5px;
-    }
-  }
+.mat-table th.mat-header-cell {
+  background-color: #fff!important;
+  font-size: .7rem!important;
+  font-weight: 500!important;
+  color: #b3b3b3;
+  border-bottom: none;
 }

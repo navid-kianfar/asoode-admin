@@ -4,9 +4,18 @@
     <tr mat-header-row *matHeaderRowDef="columns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: columns"></tr>
   </table>
-
-  <mat-paginator
-    [hidden]="showFooter === false"
-    showFirstLastButtons
-  ></mat-paginator>
+  <div class="paginator">
+    <button mat-stroked-button [disabled]="isLoading || currentPage === 1" (click)="changePage(1)">
+      {{ 'BEGIN' | translate}}
+    </button>&nbsp;
+    <button mat-stroked-button [disabled]="isLoading || currentPage === 1" (click)="changePage(currentPage - 1)">
+      {{ 'PREV' | translate}}
+    </button>&nbsp;
+    <button mat-stroked-button [disabled]="isLoading || currentPage === totalPages" (click)="changePage(currentPage + 1)">
+      {{ 'NEXT' | translate}}
+    </button>&nbsp;
+    <button mat-stroked-button [disabled]="isLoading || currentPage === totalPages" (click)="changePage(totalPages)">
+      {{ 'LAST' | translate}}
+    </button>
+  </div>
 </div>
