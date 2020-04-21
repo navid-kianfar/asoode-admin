@@ -17,10 +17,6 @@
       class="member-item"
       [value]="item.value"
     >
-      <ng-container *ngIf="item.payload && item.payload.initials; else normal">
-        <app-member-info [model]="item.payload"></app-member-info>
-      </ng-container>
-
       <ng-template #normal>
         <span>{{ item.text | translate: true }}</span>
       </ng-template>

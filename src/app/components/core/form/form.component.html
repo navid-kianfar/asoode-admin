@@ -31,17 +31,6 @@
                   {{ element.config.label | translate: true }}
                 </label>
 
-                <!-- Verification -->
-                <ng-container
-                  *ngIf="element.type === FormElementType.Verification"
-                >
-                  <app-phone-verification
-                    [cssClass]="element.config.cssClass"
-                    [disabled]="checkDisabled(group, element)"
-                    [(model)]="element.params.model"
-                  ></app-phone-verification>
-                </ng-container>
-
                 <!-- Button -->
                 <ng-container *ngIf="element.type === FormElementType.Button">
                   <div>
