@@ -31,8 +31,10 @@ import { PageEvent } from '@angular/material/paginator';
 export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
   commandListener: Subscription;
   dataSource = new MatTableDataSource<T>([]);
+  query: string;
 
   @Input() columns: string[];
+  @Input() filter: boolean;
   @Input() showFooter: boolean;
   @Input() disabled: boolean;
   @Input() headerHeight: number;
@@ -42,13 +44,12 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
   @Input() backend: string;
   @Input() backendParams: any;
   @Input() pageSize: number;
-  @Input() commander: EventEmitter<GridCommand<any>>;
   @Input() rows: T[];
   @Input() isLoading: boolean;
   @Input() currentPage: number;
   @Input() totalPages: number;
   @Input() totalItems: number;
-
+  @Input() commander: EventEmitter<GridCommand<any>>;
   @Output() rowsChange = new EventEmitter<any[]>();
   @Output() isLoadingChange = new EventEmitter<boolean>();
   @Output() currentPageChange = new EventEmitter<number>();
@@ -65,6 +66,10 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
   ) {}
 
   ngOnInit() {
+    this.currentPage = 1;
+    this.pageSize = 10;
+    this.totalItems = 0;
+    this.totalPages = 0;
     if (this.showFooter !== false) {
       this.currentPage = 1;
       if (this.rowHeight === undefined) {
@@ -138,7 +143,10 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
     this.isLoadingChange.emit(this.isLoading);
     const op = await this.httpService.grid<T>({
       backend: this.backend,
-      params: this.backendParams,
+      params: {
+        query: this.query,
+        ...(this.backendParams || {})
+      },
       page: this.currentPage || 1,
       pageSize: this.pageSize || 10
     });
@@ -159,5 +167,11 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
     this.totalItemsChange.emit(this.totalItems);
     this.rowsChange.emit(op.data.items);
     this.totalPagesChange.emit(this.totalPages);
+  }
+
+  filterResult() {
+    this.currentPage = 1;
+    this.currentPageChange.emit(1);
+    this.updateDataSource();
   }
 }
