@@ -46,25 +46,25 @@
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
         <td class="operations" mat-cell *matCellDef="let element">
-          <button>
+          <button (click)="prepareEdit(element)">
             <i class="ikon-pen5"></i>
           </button>
-          <button>
-            <i class="ikon-lock5"></i>
+          <button (click)="toggleStatus(element)">
+            <i class="{{ element.enabled ? 'ikon-unlocked2' : 'ikon-lock5' }}"></i>
           </button>
-          <button>
+          <button (click)="prepareReset(element)">
             <i class="ikon-key3"></i>
           </button>
-          <button>
+          <button (click)="loginAs(element)">
             <i class="ikon-keyhole"></i>
           </button>
-          <button>
+          <button (click)="import(element)">
             <i class="ikon-users4"></i>
           </button>
-          <button>
+          <button (click)="plan(element)">
             <i class="ikon-flag2"></i>
           </button>
-          <button>
+          <button (click)="transactions(element)">
             <i class="ikon-coin-dollar"></i>
           </button>
         </td>

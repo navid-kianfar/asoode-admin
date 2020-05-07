@@ -1,10 +1,17 @@
 <div class="af-grid {{ cssClass }}">
-  <div class="filter" *ngIf="filter">
-    <input [disabled]="isLoading" type="text" [(ngModel)]="query" [placeholder]="'FILTER_QUERY' | translate">
-    <button [disabled]="isLoading" mat-flat-button color="primary" (click)="filterResult()">
-      <i *ngIf="isLoading" class="icon-spinner2 icon-spin"></i>
-      {{ 'FILTER' | translate }}
-    </button>
+  <div class="extra">
+    <div class="create">
+      <button *ngIf="create" [disabled]="isLoading" mat-flat-button color="primary" (click)="onCreate.emit()">
+        {{ 'CREATE' | translate }}
+      </button>
+    </div>
+    <div class="filter" *ngIf="filter">
+      <input [disabled]="isLoading" type="text" [(ngModel)]="query" [placeholder]="'FILTER_QUERY' | translate">
+      <button [disabled]="isLoading" mat-flat-button color="primary" (click)="filterResult()">
+        <i *ngIf="isLoading" class="icon-spinner2 icon-spin"></i>
+        {{ 'FILTER' | translate }}
+      </button>
+    </div>
   </div>
   <table mat-table [dataSource]="dataSource">
     <ng-content></ng-content>

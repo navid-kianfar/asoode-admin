@@ -34,6 +34,7 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
   query: string;
 
   @Input() columns: string[];
+  @Input() create: boolean;
   @Input() filter: boolean;
   @Input() showFooter: boolean;
   @Input() disabled: boolean;
@@ -55,6 +56,7 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
   @Output() currentPageChange = new EventEmitter<number>();
   @Output() totalPagesChange = new EventEmitter<number>();
   @Output() totalItemsChange = new EventEmitter<number>();
+  @Output() onCreate = new EventEmitter<void>();
 
   // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatTable, { static: true }) table: MatTable<T>;
@@ -163,7 +165,6 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
     this.dataSource.data = op.data.items;
 
 
-    console.log(this.dataSource.data, this.dataSource.paginator);
     this.totalItemsChange.emit(this.totalItems);
     this.rowsChange.emit(op.data.items);
     this.totalPagesChange.emit(this.totalPages);

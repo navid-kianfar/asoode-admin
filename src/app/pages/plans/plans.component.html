@@ -1,1 +1,56 @@
-<p>plans works!</p>
+<div class="plans-container">
+  <div class="box">
+    <app-grid [create]="false"
+              filter="true"
+              [commander]="commander"
+              backend="/admin/plan/list"
+              (onCreate)="prepareCreate()"
+              [columns]="['index', 'culture', 'createdAt', 'title', 'action']">
+
+      <!-- Index Column -->
+      <ng-container matColumnDef="index">
+        <th style="width: 70px" mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.index }}
+        </td>
+      </ng-container>
+
+      <!-- Culture Column -->
+      <ng-container matColumnDef="culture">
+        <th style="width: 70px" mat-header-cell *matHeaderCellDef>{{ 'CULTURE' | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.culture }}
+        </td>
+      </ng-container>
+
+      <!-- Created at Column -->
+      <ng-container matColumnDef="createdAt">
+        <th style="width: 120px" mat-header-cell *matHeaderCellDef>{{ 'CREATED_AT' | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.createdAt | culturedDate }}
+        </td>
+      </ng-container>
+
+      <!-- Title Column -->
+      <ng-container matColumnDef="title">
+        <th style="width: 250px" mat-header-cell *matHeaderCellDef>{{ 'TITLE' | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.title }}
+        </td>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+        <td class="operations" mat-cell *matCellDef="let element">
+          <button (click)="prepareEdit(element)">
+            <i class="ikon-pen5"></i>
+          </button>
+          <button (click)="toggleStatus(element)">
+            <i class="{{ element.enabled ? 'ikon-unlocked2' : 'ikon-lock5' }}"></i>
+          </button>
+        </td>
+      </ng-container>
+    </app-grid>
+  </div>
+</div>
