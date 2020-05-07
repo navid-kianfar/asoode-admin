@@ -5,29 +5,25 @@ import { OperationResult } from '../../library/core/operation-result';
 @Injectable({
   providedIn: 'root'
 })
-export class PlanService {
+export class UsersService {
 
   constructor(private readonly httpService: HttpService) { }
 
   async toggle(id: any): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      '/admin/plan/toggle/' + id,
-    );
-  }
-  async edit(id: any, model: any): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(
-      '/admin/plan/edit/' + id, model
-    );
-  }
-  async create(model: any): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(
-      '/admin/plan/create/', model
+      '/admin/user/toggle/' + id
     );
   }
 
-  async editUserPlan(id: any, model: any): Promise<OperationResult<boolean>> {
+  async resetPassword(id: any, model: any): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      '/admin/plan/user/' + id, model
+      '/admin/user/reset-password/' + id, model
+    );
+  }
+
+  async edit(id: any, model: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      '/admin/user/edit/' + id, model
     );
   }
 }

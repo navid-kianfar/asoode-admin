@@ -6,6 +6,7 @@ import { FormService } from '../../services/core/form.service';
 import { PromptComponent } from '../../modals/prompt/prompt.component';
 import { OperationResultStatus } from '../../library/core/enums';
 import { PlanService } from '../../services/app/plan.service';
+import { UsersService } from '../../services/app/users.service';
 
 @Component({
   selector: 'app-users',
@@ -18,6 +19,7 @@ export class UsersComponent implements OnInit {
     private readonly modalService: ModalService,
     private readonly formService: FormService,
     private readonly plansService: PlanService,
+    private readonly usersService: UsersService,
   ) { }
 
   ngOnInit() {
@@ -230,7 +232,6 @@ export class UsersComponent implements OnInit {
     ];
   }
 
-
   plan(element: any) {
     const form = this.createForm(element.plan);
     this.formService.setModel(form, element.plan);
@@ -252,16 +253,138 @@ export class UsersComponent implements OnInit {
       .subscribe(() => {});
   }
 
-  prepareEdit(element: any) {
-
-  }
-
-  toggleStatus(element: any) {
-
+  async toggleStatus(element: any) {
+    this.modalService.confirm({
+      title: 'USERS_TOGGLE_TITLE',
+      message: 'USERS_TOGGLE_CONFIRM',
+      action: async () => {
+        const op = await this.usersService.toggle(element.id);
+        if (op.status !== OperationResultStatus.Success) {
+          // TODO: handle error
+          return;
+        }
+        element.enabled = !element.enabled;
+      }
+    });
   }
 
   prepareReset(element: any) {
+    this.modalService
+      .show(PromptComponent, {
+        form: [
+          {
+            elements: [
+              this.formService.createInput({
+                config: { field: 'password' },
+                params: {
+                  model: '',
+                  password: true,
+                  ltr: true,
+                  placeHolder: 'PASSWORD',
+                },
+                validation: {
+                  required: { value: true, message: 'PASSWORD_REQUIRED' },
+                  minLength: { value: 6, message: 'PASSWORD_MIN_LENGTH' },
+                  maxLength: { value: 50, message: 'PASSWORD_MAX_LENGTH' },
+                },
+              }),
+              this.formService.createInput({
+                config: { field: 'confirmPassword' },
+                params: {
+                  model: '',
+                  password: true,
+                  ltr: true,
+                  placeHolder: 'CONFIRM_PASSWORD',
+                },
+                validation: {
+                  required: {
+                    value: true,
+                    message: 'CONFIRM_PASSWORD_REQUIRED',
+                  },
+                  match: {
+                    toField: 'password',
+                    message: 'CONFIRM_PASSWORD_MISS_MATCH',
+                  },
+                },
+              }),
+            ],
+          },
+        ],
+        actionLabel: 'RESET_PASSWORD',
+        action: (model, form) => this.usersService.resetPassword(element.id, model),
+        actionColor: 'primary',
+        title: 'RESET_PASSWORD',
+      })
+      .subscribe(() => {});
+  }
 
+  prepareEdit(element: any) {
+    this.modalService
+      .show(PromptComponent, {
+        form: [
+          {
+            size: 6,
+            elements: [
+              this.formService.createInput({
+                config: { field: 'firstName' },
+                params: {
+                  model: element.firstName,
+                  placeHolder: 'FIRST_NAME',
+                },
+                validation: {
+                  required: { value: true, message: 'FIRST_NAME_REQUIRED' }
+                },
+              }),
+              this.formService.createInput({
+                config: { field: 'lastName' },
+                params: {
+                  model: element.lastName,
+                  placeHolder: 'LAST_NAME',
+                },
+                validation: {
+                  required: { value: true, message: 'LAST_NAME_REQUIRED' }
+                },
+              }),
+            ],
+          },
+          {
+            size: 6,
+            elements: [
+              this.formService.createInput({
+                config: { field: 'phone' },
+                params: {
+                  ltr: true,
+                  model: element.phone,
+                  placeHolder: 'PHONE',
+                }
+              }),
+              this.formService.createInput({
+                config: { field: 'email' },
+                params: {
+                  ltr: true,
+                  model: element.email,
+                  placeHolder: 'EMAIL',
+                },
+                validation: {
+                  required: { value: true, message: 'EMAIL_REQUIRED' }
+                },
+              }),
+            ]
+          }
+        ],
+        actionLabel: 'EDIT_USER',
+        action: async (model, form) => {
+          const op = await this.usersService.edit(element.id, model);
+          if (op.status !== OperationResultStatus.Success) {
+            // TODO: handle error
+            return;
+          }
+          Object.assign(element, model);
+        },
+        actionColor: 'primary',
+        title: 'EDIT_USER',
+      })
+      .subscribe(() => {});
   }
 
   loginAs(element: any) {
