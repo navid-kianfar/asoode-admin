@@ -175,4 +175,10 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
     this.currentPageChange.emit(1);
     this.updateDataSource();
   }
+
+  calculateOf() {
+    if (!this.totalItems) { return 0; }
+    if (this.totalItems < this.pageSize) { return this.totalItems; }
+    return ((this.currentPage - 1) * this.pageSize) + this.pageSize;
+  }
 }
