@@ -1,0 +1,7 @@
+<div class="wysiwyg-editor">
+  <ck-editor name="editor1"
+             [ngModel]="model"
+             (ngModelChange)="textChange($event)"
+             [language]="cultureService.lang"
+             skin="moono-lisa"></ck-editor>
+</div>

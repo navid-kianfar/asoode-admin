@@ -103,6 +103,15 @@
                   ></app-input>
                 </ng-container>
 
+                <!-- Editor -->
+                <ng-container *ngIf="element.type === FormElementType.Editor">
+                  <app-wysiwyg-editor
+                    [placeHolder]="element.params.placeHolder"
+                    [disabled]="checkDisabled(group, element)"
+                    [(model)]="element.params.model"
+                  ></app-wysiwyg-editor>
+                </ng-container>
+
                 <!-- Number -->
                 <ng-container *ngIf="element.type === FormElementType.Number">
                   <app-number
@@ -136,6 +145,18 @@
                     [prependIcon]="element.params.prependIcon"
                     [waiting]="element.params.waiting"
                   ></app-dropdown>
+                </ng-container>
+
+                <!-- File -->
+                <ng-container *ngIf="element.type === FormElementType.File">
+                  <app-file
+                    [cssClass]="element.config.cssClass"
+                    [disabled]="checkDisabled(group, element)"
+                    [(model)]="element.params.model"
+                    [placeHolder]="element.params.placeHolder"
+                    [backend]="element.params.backend"
+                    [backendParams]="element.params.backendParams"
+                  ></app-file>
                 </ng-container>
 
                 <app-validation

@@ -12,3 +12,8 @@ export enum PlanType {
 export enum CostUnit {
   Toman = 1
 }
+export enum BlogType {
+  Post = 1,
+  Faq = 2,
+  Page = 3
+}

@@ -5898,6 +5898,13 @@ neo-async@^2.5.0, neo-async@^2.6.1:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
 
+ngx-ckeditor@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-ckeditor/-/ngx-ckeditor-8.0.0.tgz#9c4180eea0a513ad81c028e84b10f4f5312a7bcf"
+  integrity sha512-B9eddnGqQ1Aq/vSfPddT9o2fFIu6CgwKWbmTzmLWNazxEZ+F3cRJj0jbIeSKDNERVLzRRRxn/7q9w+kFszTXHQ==
+  dependencies:
+    tslib "^1.9.0"
+
 ngx-color-picker@^9.0.0:
   version "9.0.0"
   resolved "https://registry.yarnpkg.com/ngx-color-picker/-/ngx-color-picker-9.0.0.tgz#18006121aa5674fb1a8347f2b5b27055fc0e17ae"

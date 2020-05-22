@@ -4,30 +4,14 @@
               filter="true"
               [commander]="commander"
               (onCreate)="create($event)"
-              backend="/admin/blog/list"
-              [columns]="['index', 'culture', 'type', 'title', 'action']">
+              [backend]="'/admin/blog/posts/' + id"
+              [columns]="['index', 'title', 'summary', 'action']">
 
       <!-- Index Column -->
       <ng-container matColumnDef="index">
         <th style="width: 70px" mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
           {{ element.index }}
-        </td>
-      </ng-container>
-
-      <!-- Culture at Column -->
-      <ng-container matColumnDef="culture">
-        <th style="width: 120px" mat-header-cell *matHeaderCellDef>{{ 'CULTURE' | translate }}</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.culture }}
-        </td>
-      </ng-container>
-
-      <!-- Type Column -->
-      <ng-container matColumnDef="type">
-        <th style="width: 250px" mat-header-cell *matHeaderCellDef>{{ 'TYPE' | translate }}</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.type | enum:'BlogType' }}
         </td>
       </ng-container>
 
@@ -39,12 +23,20 @@
         </td>
       </ng-container>
 
+      <!-- Summary Column -->
+      <ng-container matColumnDef="summary">
+        <th mat-header-cell *matHeaderCellDef>{{ 'SUMMARY' | translate }}</th>
+        <td style="text-align: justify" mat-cell *matCellDef="let element">
+          {{ element.summary }}
+        </td>
+      </ng-container>
+
       <!-- Action Column -->
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
-        <td class="operations" mat-cell *matCellDef="let element">
-          <button (click)="posts(element)">
-            <i class="ikon-magazine"></i>
+        <td style="width: 100px" class="operations" mat-cell *matCellDef="let element">
+          <button (click)="prepareDelete(element)">
+            <i class="icon-delete"></i>
           </button>
           <button (click)="prepareEdit(element)">
             <i class="ikon-pen5"></i>

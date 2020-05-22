@@ -25,6 +25,7 @@ import {
 } from '@angular/material';
 import { MomentModule } from 'ngx-moment';
 import { QuillModule } from 'ngx-quill';
+import { CKEditorModule } from 'ngx-ckeditor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpInterceptor } from './services/general/http.interceptor';
@@ -91,6 +92,8 @@ import { BlogComponent } from './pages/blog/blog.component';
 import { CmsComponent } from './pages/cms/cms.component';
 import { PlansComponent } from './pages/plans/plans.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
+import { PostsComponent } from './pages/posts/posts.component';
+import { WysiwygEditorComponent } from './components/core/wysiwyg-editor/wysiwyg-editor.component';
 
 @NgModule({
   declarations: [
@@ -148,12 +151,15 @@ import { TransactionsComponent } from './pages/transactions/transactions.compone
     CmsComponent,
     PlansComponent,
     TransactionsComponent,
+    PostsComponent,
+    WysiwygEditorComponent,
   ],
   entryComponents: [
     ConfirmComponent,
     PromptComponent,
   ],
   imports: [
+    CKEditorModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

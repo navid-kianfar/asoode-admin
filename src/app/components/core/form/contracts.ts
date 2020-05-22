@@ -51,6 +51,14 @@ export interface IFormElementInput extends IFormElement {
     rows?: number;
   };
 }
+export interface IFormElementEditor extends IFormElement {
+  params: {
+    model: string;
+    readonly?: boolean;
+    disabled?: boolean;
+    placeHolder?: string;
+  };
+}
 export interface IFormElementVerification extends IFormElement {
   params: {
     cssClass?: string;
@@ -111,6 +119,15 @@ export interface IFormElementDropDown extends IFormElement {
     backendParams?: any;
     enumExcept?: number;
     knownList?: DropdownKnownList;
+  };
+}
+export interface IFormElementFilePicker extends IFormElement {
+  params: {
+    model?: File|File[];
+    disabled?: boolean;
+    placeHolder?: string;
+    backend?: string;
+    backendParams?: any;
   };
 }
 export interface IFormElementConfiguration {

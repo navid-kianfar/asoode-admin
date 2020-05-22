@@ -9,6 +9,7 @@ import { CmsComponent } from './pages/cms/cms.component';
 import { PlansComponent } from './pages/plans/plans.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
 import { UsersComponent } from './pages/users/users.component';
+import { PostsComponent } from './pages/posts/posts.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,11 @@ const routes: Routes = [
   {
     path: 'users',
     component: UsersComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'posts/:id',
+    component: PostsComponent,
     canActivate: [AuthGuard],
   },
   { path: '**', redirectTo: 'dashboard' },

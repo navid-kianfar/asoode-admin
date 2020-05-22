@@ -1,21 +1,22 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
+import { GridCommand } from '../../view-models/core/grid-types';
 import { ModalService } from '../../services/core/modal.service';
 import { TranslateService } from '../../services/core/translate.service';
 import { NotificationService } from '../../services/core/notification.service';
+import { BlogService } from '../../services/app/blog.service';
+import { FormService } from '../../services/core/form.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BlogType } from '../../library/app/enums';
 import { PromptComponent } from '../../modals/prompt/prompt.component';
 import { OperationResultStatus } from '../../library/core/enums';
-import { BlogService } from '../../services/app/blog.service';
-import { GridCommand } from '../../view-models/core/grid-types';
-import { FormService } from '../../services/core/form.service';
-import { BlogType } from '../../library/app/enums';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-blog',
-  templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.scss']
+  selector: 'app-posts',
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.scss']
 })
-export class BlogComponent implements OnInit {
+export class PostsComponent implements OnInit {
+  id: string;
   commander = new EventEmitter<GridCommand<any>>();
 
   constructor(
@@ -25,40 +26,17 @@ export class BlogComponent implements OnInit {
     private readonly blogService: BlogService,
     private readonly formService: FormService,
     private readonly router: Router,
+    private readonly activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit() {
+    this.id = this.activatedRoute.snapshot.params.id;
   }
 
   createForm() {
     return [
       {
         elements: [
-          this.formService.createDropDown({
-            config: { field: 'culture' },
-            params: {
-              model: 'fa',
-              items: [
-                { text: 'Persian', value: 'fa' },
-                { text: 'English', value: 'en' },
-                { text: 'Arabic', value: 'ar' }
-              ]
-            },
-            validation: {
-              required: { value: true, message: 'CULTURE_REQUIRED' }
-            },
-          }),
-          this.formService.createDropDown({
-            config: { field: 'type' },
-            params: {
-              model: BlogType.Post,
-              items: [],
-              enum: 'BlogType'
-            },
-            validation: {
-              required: { value: true, message: 'CULTURE_REQUIRED' }
-            },
-          }),
           this.formService.createInput({
             config: { field: 'title' },
             params: {
@@ -88,6 +66,42 @@ export class BlogComponent implements OnInit {
               textArea: true
             },
           }),
+          this.formService.createInput({
+            config: { field: 'summary' },
+            params: {
+              model: '',
+              placeHolder: 'SUMMARY',
+              textArea: true
+            }
+          }),
+          this.formService.createEditor({
+            config: { field: 'text' },
+            params: {
+              model: '',
+              placeHolder: 'TEXT'
+            },
+            validation: {
+              required: { value: true, message: 'TEXT_REQUIRED' }
+            },
+          }),
+          this.formService.createFilePicker({
+            config: { field: 'thumbImage' },
+            params: {
+              placeHolder: 'THUMB_IMAGE'
+            }
+          }),
+          this.formService.createFilePicker({
+            config: { field: 'mediumImage' },
+            params: {
+              placeHolder: 'MEDIUM_IMAGE'
+            }
+          }),
+          this.formService.createFilePicker({
+            config: { field: 'largeImage' },
+            params: {
+              placeHolder: 'LARGE_IMAGE'
+            }
+          }),
         ],
       }
     ];
@@ -97,9 +111,9 @@ export class BlogComponent implements OnInit {
     this.modalService
       .show(PromptComponent, {
         form: this.createForm(),
-        actionLabel: 'CREATE_BLOG',
+        actionLabel: 'CREATE_POST',
         action: async (model, form) => {
-          const op = await this.blogService.create(model);
+          const op = await this.blogService.post(this.id, model);
           if (op.status !== OperationResultStatus.Success) {
             // TODO: handle error
             return;
@@ -107,7 +121,7 @@ export class BlogComponent implements OnInit {
           this.commander.emit({ reload: true });
         },
         actionColor: 'primary',
-        title: 'CREATE_BLOG',
+        title: 'CREATE_POST',
       })
       .subscribe(() => {});
   }
@@ -118,9 +132,9 @@ export class BlogComponent implements OnInit {
     this.modalService
       .show(PromptComponent, {
         form,
-        actionLabel: 'EDIT_BLOG',
+        actionLabel: 'EDIT_POST',
         action: async (model, form) => {
-          const op = await this.blogService.edit(element.id, model);
+          const op = await this.blogService.editPost(element.id, model);
           if (op.status !== OperationResultStatus.Success) {
             // TODO: handle error
             return;
@@ -133,7 +147,7 @@ export class BlogComponent implements OnInit {
       .subscribe(() => {});
   }
 
-  posts(element: any) {
-    this.router.navigateByUrl('/posts/' + element.id);
+  prepareDelete(element: any) {
+
   }
 }

@@ -51,5 +51,9 @@
   "STATUS": "وضعیت",
   "CREATE_PLAN": "ایجاد پلان",
   "EDIT_PLAN": "ویرایش پلان",
-  "CANCEL": "انصراف"
+  "CANCEL": "انصراف",
+
+  "ENUMS_BLOG_TYPE_PAGE": "Page",
+  "ENUMS_BLOG_TYPE_FAQ": "Faq",
+  "ENUMS_BLOG_TYPE_POST": "Post"
 }
