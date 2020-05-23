@@ -1,1 +1,10 @@
-<p>file works!</p>
+<div class="file-picker">
+  <input
+    #filePicker
+    (change)="onChange($event.target.files)"
+    [accept]="allowedTypes"
+    [multiple]="multiple"
+    [placeholder]="placeHolder|translate"
+    type="file"
+  />
+</div>

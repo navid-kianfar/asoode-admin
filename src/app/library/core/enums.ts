@@ -42,6 +42,16 @@ export enum FormElementType {
   Label = 18,
   Number = 19,
 }
+export enum FileType {
+  Any = 1,
+  Image = 2,
+  Audio = 3,
+  Video = 4,
+  Excel = 5,
+  Word = 6,
+  Pdf = 7,
+  Specific = 8,
+}
 export enum DropdownKnownList {
   Countries = 1,
   Zones = 2,
