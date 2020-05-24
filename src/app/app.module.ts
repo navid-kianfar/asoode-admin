@@ -158,10 +158,7 @@ import { MarketersComponent } from './pages/marketers/marketers.component';
     ErrorsComponent,
     MarketersComponent,
   ],
-  entryComponents: [
-    ConfirmComponent,
-    PromptComponent,
-  ],
+  entryComponents: [ConfirmComponent, PromptComponent],
   imports: [
     CKEditorModule,
     BrowserModule,

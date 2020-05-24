@@ -23,5 +23,5 @@ export class HeaderComponent implements OnInit {
     private readonly modalService: ModalService,
     private readonly httpService: HttpService,
   ) {}
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

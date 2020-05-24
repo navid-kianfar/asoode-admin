@@ -123,7 +123,7 @@ export interface IFormElementDropDown extends IFormElement {
 }
 export interface IFormElementFilePicker extends IFormElement {
   params: {
-    model?: File|File[];
+    model?: File | File[];
     disabled?: boolean;
     placeHolder?: string;
     backend?: string;

@@ -1,5 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { DropdownKnownList, FileType, OperationResultStatus } from '../../../library/core/enums';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import {
+  DropdownKnownList,
+  FileType,
+  OperationResultStatus,
+} from '../../../library/core/enums';
 import { ListViewModel } from '../../../view-models/core/list-types';
 import { HttpService } from '../../../services/core/http.service';
 import { TranslateService } from '../../../services/core/translate.service';

@@ -9,8 +9,7 @@ import { OperationResultStatus } from '../../../library/core/enums';
 export class DashboardComponent implements OnInit {
   waiting: boolean;
 
-  constructor(
-  ) {}
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 }

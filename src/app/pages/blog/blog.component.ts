@@ -13,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.scss']
+  styleUrls: ['./blog.component.scss'],
 })
 export class BlogComponent implements OnInit {
   commander = new EventEmitter<GridCommand<any>>();
@@ -25,10 +25,9 @@ export class BlogComponent implements OnInit {
     private readonly blogService: BlogService,
     private readonly formService: FormService,
     private readonly router: Router,
-  ) { }
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   createForm() {
     return [
@@ -41,11 +40,11 @@ export class BlogComponent implements OnInit {
               items: [
                 { text: 'Persian', value: 'fa' },
                 { text: 'English', value: 'en' },
-                { text: 'Arabic', value: 'ar' }
-              ]
+                { text: 'Arabic', value: 'ar' },
+              ],
             },
             validation: {
-              required: { value: true, message: 'CULTURE_REQUIRED' }
+              required: { value: true, message: 'CULTURE_REQUIRED' },
             },
           }),
           this.formService.createDropDown({
@@ -53,10 +52,10 @@ export class BlogComponent implements OnInit {
             params: {
               model: BlogType.Post,
               items: [],
-              enum: 'BlogType'
+              enum: 'BlogType',
             },
             validation: {
-              required: { value: true, message: 'CULTURE_REQUIRED' }
+              required: { value: true, message: 'CULTURE_REQUIRED' },
             },
           }),
           this.formService.createInput({
@@ -66,7 +65,7 @@ export class BlogComponent implements OnInit {
               placeHolder: 'TITLE',
             },
             validation: {
-              required: { value: true, message: 'TITLE_REQUIRED' }
+              required: { value: true, message: 'TITLE_REQUIRED' },
             },
           }),
           this.formService.createInput({
@@ -74,10 +73,10 @@ export class BlogComponent implements OnInit {
             params: {
               model: '',
               placeHolder: 'DESCRIPTION',
-              textArea: true
+              textArea: true,
             },
             validation: {
-              required: { value: true, message: 'DESCRIPTION_REQUIRED' }
+              required: { value: true, message: 'DESCRIPTION_REQUIRED' },
             },
           }),
           this.formService.createInput({
@@ -85,11 +84,11 @@ export class BlogComponent implements OnInit {
             params: {
               model: '',
               placeHolder: 'KEYWORDS',
-              textArea: true
+              textArea: true,
             },
           }),
         ],
-      }
+      },
     ];
   }
 

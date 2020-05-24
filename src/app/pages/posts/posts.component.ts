@@ -13,7 +13,7 @@ import { OperationResultStatus } from '../../library/core/enums';
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.scss']
+  styleUrls: ['./posts.component.scss'],
 })
 export class PostsComponent implements OnInit {
   id: string;
@@ -27,7 +27,7 @@ export class PostsComponent implements OnInit {
     private readonly formService: FormService,
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params.id;
@@ -44,7 +44,7 @@ export class PostsComponent implements OnInit {
               placeHolder: 'TITLE',
             },
             validation: {
-              required: { value: true, message: 'TITLE_REQUIRED' }
+              required: { value: true, message: 'TITLE_REQUIRED' },
             },
           }),
           this.formService.createInput({
@@ -52,10 +52,10 @@ export class PostsComponent implements OnInit {
             params: {
               model: '',
               placeHolder: 'DESCRIPTION',
-              textArea: true
+              textArea: true,
             },
             validation: {
-              required: { value: true, message: 'DESCRIPTION_REQUIRED' }
+              required: { value: true, message: 'DESCRIPTION_REQUIRED' },
             },
           }),
           this.formService.createInput({
@@ -63,7 +63,7 @@ export class PostsComponent implements OnInit {
             params: {
               model: '',
               placeHolder: 'KEYWORDS',
-              textArea: true
+              textArea: true,
             },
           }),
           this.formService.createInput({
@@ -71,39 +71,39 @@ export class PostsComponent implements OnInit {
             params: {
               model: '',
               placeHolder: 'SUMMARY',
-              textArea: true
-            }
+              textArea: true,
+            },
           }),
           this.formService.createEditor({
             config: { field: 'text' },
             params: {
               model: '',
-              placeHolder: 'TEXT'
+              placeHolder: 'TEXT',
             },
             validation: {
-              required: { value: true, message: 'TEXT_REQUIRED' }
+              required: { value: true, message: 'TEXT_REQUIRED' },
             },
           }),
           this.formService.createFilePicker({
             config: { field: 'thumbImage' },
             params: {
-              placeHolder: 'THUMB_IMAGE'
-            }
+              placeHolder: 'THUMB_IMAGE',
+            },
           }),
           this.formService.createFilePicker({
             config: { field: 'mediumImage' },
             params: {
-              placeHolder: 'MEDIUM_IMAGE'
-            }
+              placeHolder: 'MEDIUM_IMAGE',
+            },
           }),
           this.formService.createFilePicker({
             config: { field: 'largeImage' },
             params: {
-              placeHolder: 'LARGE_IMAGE'
-            }
+              placeHolder: 'LARGE_IMAGE',
+            },
           }),
         ],
-      }
+      },
     ];
   }
 
@@ -147,7 +147,5 @@ export class PostsComponent implements OnInit {
       .subscribe(() => {});
   }
 
-  prepareDelete(element: any) {
-
-  }
+  prepareDelete(element: any) {}
 }

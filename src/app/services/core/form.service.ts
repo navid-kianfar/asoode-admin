@@ -10,7 +10,10 @@ import {
   FormViewModel,
   IFormElementCheckbox,
   IFormElementLabel,
-  IFormElementDatePicker, IFormElementNumber, IFormElementFilePicker, IFormElementEditor,
+  IFormElementDatePicker,
+  IFormElementNumber,
+  IFormElementFilePicker,
+  IFormElementEditor,
 } from '../../components/core/form/contracts';
 import { DropdownKnownList, FormElementType } from '../../library/core/enums';
 import { CaptchaObject } from '../../view-models/core/captcha-types';
@@ -44,7 +47,9 @@ export class FormService {
     options.validation = options.validation || { required: { value: false } };
     return options;
   }
-  createVerification(options: IFormElementVerification): IFormElementVerification {
+  createVerification(
+    options: IFormElementVerification,
+  ): IFormElementVerification {
     options.type = FormElementType.Verification;
     options.validation = options.validation || {
       required: { value: true, message: 'VERIFICATION_REQUIRED' },
@@ -346,7 +351,8 @@ export class FormService {
     }
     if (element.validation.min && element.validation.min.value) {
       if (
-        (element.params.model === undefined || element.params.model === null) ||
+        element.params.model === undefined ||
+        element.params.model === null ||
         element.params.model < element.validation.min.value
       ) {
         element.validation.errors = [element.validation.min.message];
@@ -355,7 +361,8 @@ export class FormService {
     }
     if (element.validation.max && element.validation.max.value) {
       if (
-        (element.params.model === undefined || element.params.model === null) ||
+        element.params.model === undefined ||
+        element.params.model === null ||
         element.params.model > element.validation.max.value
       ) {
         element.validation.errors = [element.validation.max.message];

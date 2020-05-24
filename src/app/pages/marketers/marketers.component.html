@@ -1,10 +1,11 @@
 <div class="marketers-container">
   <div class="box">
-    <app-grid filter="true"
-              create="true"
-              backend="/admin/marketers/list"
-              [columns]="['index', 'createdAt', 'code', 'fullName', 'action']">
-
+    <app-grid
+      filter="true"
+      create="true"
+      backend="/admin/marketers/list"
+      [columns]="['index', 'createdAt', 'code', 'fullName', 'action']"
+    >
       <!-- Index Column -->
       <ng-container matColumnDef="index">
         <th style="width: 70px" mat-header-cell *matHeaderCellDef></th>
@@ -15,7 +16,9 @@
 
       <!-- Created at Column -->
       <ng-container matColumnDef="createdAt">
-        <th style="width: 120px" mat-header-cell *matHeaderCellDef>{{ 'CREATED_AT' | translate }}</th>
+        <th style="width: 120px" mat-header-cell *matHeaderCellDef>
+          {{ 'CREATED_AT' | translate }}
+        </th>
         <td mat-cell *matCellDef="let element">
           {{ element.createdAt | culturedDate }}
         </td>
@@ -23,7 +26,9 @@
 
       <!-- Code Column -->
       <ng-container matColumnDef="code">
-        <th style="width: 150px" mat-header-cell *matHeaderCellDef>{{ 'CODE' | translate }}</th>
+        <th style="width: 150px" mat-header-cell *matHeaderCellDef>
+          {{ 'CODE' | translate }}
+        </th>
         <td mat-cell *matCellDef="let element">
           {{ element.code }}
         </td>
@@ -31,7 +36,9 @@
 
       <!-- Code Column -->
       <ng-container matColumnDef="fullName">
-        <th style="width: 250px" mat-header-cell *matHeaderCellDef>{{ 'FULL_NAME' | translate }}</th>
+        <th style="width: 250px" mat-header-cell *matHeaderCellDef>
+          {{ 'FULL_NAME' | translate }}
+        </th>
         <td mat-cell *matCellDef="let element">
           {{ element.fullName }}
         </td>
