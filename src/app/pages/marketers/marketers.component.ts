@@ -9,4 +9,12 @@ export class MarketersComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  prepareDelete(element: any) {
+
+  }
+
+  prepareEdit(element: any) {
+
+  }
 }
