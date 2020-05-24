@@ -55,5 +55,10 @@
 
   "ENUMS_BLOG_TYPE_PAGE": "Page",
   "ENUMS_BLOG_TYPE_FAQ": "Faq",
-  "ENUMS_BLOG_TYPE_POST": "Post"
+  "ENUMS_BLOG_TYPE_POST": "Post",
+  "ERRORS": "خطاها",
+  "MARKETERS": "بازاریاب ها",
+  "TYPE": "نوع",
+  "CODE": "کد",
+  "CREATE": "ایجاد"
 }

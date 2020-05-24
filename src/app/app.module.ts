@@ -94,6 +94,8 @@ import { PlansComponent } from './pages/plans/plans.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
 import { PostsComponent } from './pages/posts/posts.component';
 import { WysiwygEditorComponent } from './components/core/wysiwyg-editor/wysiwyg-editor.component';
+import { ErrorsComponent } from './pages/errors/errors.component';
+import { MarketersComponent } from './pages/marketers/marketers.component';
 
 @NgModule({
   declarations: [
@@ -153,6 +155,8 @@ import { WysiwygEditorComponent } from './components/core/wysiwyg-editor/wysiwyg
     TransactionsComponent,
     PostsComponent,
     WysiwygEditorComponent,
+    ErrorsComponent,
+    MarketersComponent,
   ],
   entryComponents: [
     ConfirmComponent,

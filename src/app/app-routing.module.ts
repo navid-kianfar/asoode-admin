@@ -10,6 +10,8 @@ import { PlansComponent } from './pages/plans/plans.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
 import { UsersComponent } from './pages/users/users.component';
 import { PostsComponent } from './pages/posts/posts.component';
+import { ErrorsComponent } from './pages/errors/errors.component';
+import { MarketersComponent } from './pages/marketers/marketers.component';
 
 const routes: Routes = [
   {
@@ -45,6 +47,16 @@ const routes: Routes = [
   {
     path: 'users',
     component: UsersComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'errors',
+    component: ErrorsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'marketers',
+    component: MarketersComponent,
     canActivate: [AuthGuard],
   },
   {
