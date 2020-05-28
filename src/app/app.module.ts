@@ -96,6 +96,7 @@ import { PostsComponent } from './pages/posts/posts.component';
 import { WysiwygEditorComponent } from './components/core/wysiwyg-editor/wysiwyg-editor.component';
 import { ErrorsComponent } from './pages/errors/errors.component';
 import { MarketersComponent } from './pages/marketers/marketers.component';
+import { ErrorModalComponent } from './modals/error/error-modal.component';
 
 @NgModule({
   declarations: [
@@ -157,8 +158,9 @@ import { MarketersComponent } from './pages/marketers/marketers.component';
     WysiwygEditorComponent,
     ErrorsComponent,
     MarketersComponent,
+    ErrorModalComponent,
   ],
-  entryComponents: [ConfirmComponent, PromptComponent],
+  entryComponents: [ConfirmComponent, PromptComponent, ErrorModalComponent],
   imports: [
     CKEditorModule,
     BrowserModule,

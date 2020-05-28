@@ -1,0 +1,19 @@
+<div class="outer" (click)="close()">
+  <div
+    class="modal-content error-modal"
+    (click)="$event.stopPropagation()"
+  >
+    <div class="modal-header">
+      <h4 class="modal-title">
+        {{ 'ERROR_LOG' | translate: true }}
+      </h4>
+      <button (click)="close()">
+        <i class="icon-cross"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <h2>{{description}}</h2>
+      <h3 class="ltr" [innerText]="errorBody"></h3>
+    </div>
+  </div>
+</div>

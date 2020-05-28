@@ -2,6 +2,7 @@
   <div class="box">
     <app-grid
       filter="true"
+      [commander]="commander"
       backend="/admin/errors/list"
       [columns]="['index', 'createdAt', 'message', 'action']"
     >

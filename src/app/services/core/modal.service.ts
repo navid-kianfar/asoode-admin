@@ -33,8 +33,8 @@ export class ModalService {
   }
 
   confirm(options: ModalParameters): { subscribe: (result) => {} } {
-    options.title = options.title || '';
-    options.message = options.message || '';
+    options.title = options.title || 'ARE_YOU_SURE_TITLE';
+    options.message = options.message || 'ARE_YOU_SURE_DESCRIPTION ';
     options.icon = options.icon || '';
     options.cssClass = options.cssClass || 'confirm-modal';
     options.actionLabel = options.actionLabel || 'CONFIRM';
