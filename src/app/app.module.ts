@@ -97,6 +97,7 @@ import { WysiwygEditorComponent } from './components/core/wysiwyg-editor/wysiwyg
 import { ErrorsComponent } from './pages/errors/errors.component';
 import { MarketersComponent } from './pages/marketers/marketers.component';
 import { ErrorModalComponent } from './modals/error/error-modal.component';
+import { DiscountsComponent } from './pages/discounts/discounts.component';
 
 @NgModule({
   declarations: [
@@ -159,6 +160,7 @@ import { ErrorModalComponent } from './modals/error/error-modal.component';
     ErrorsComponent,
     MarketersComponent,
     ErrorModalComponent,
+    DiscountsComponent,
   ],
   entryComponents: [ConfirmComponent, PromptComponent, ErrorModalComponent],
   imports: [

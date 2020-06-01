@@ -12,7 +12,7 @@ import { ErrorModalComponent } from '../../modals/error/error-modal.component';
   styleUrls: ['./errors.component.scss'],
 })
 export class ErrorsComponent implements OnInit {
-  commander: EventEmitter<GridCommand<any>>;
+  commander = new EventEmitter<GridCommand<any>>();
   constructor(
     private readonly modalService: ModalService,
     private readonly errorsService: ErrorsService,

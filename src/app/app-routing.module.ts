@@ -12,6 +12,7 @@ import { UsersComponent } from './pages/users/users.component';
 import { PostsComponent } from './pages/posts/posts.component';
 import { ErrorsComponent } from './pages/errors/errors.component';
 import { MarketersComponent } from './pages/marketers/marketers.component';
+import { DiscountsComponent } from './pages/discounts/discounts.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,11 @@ const routes: Routes = [
   {
     path: 'users',
     component: UsersComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'discounts',
+    component: DiscountsComponent,
     canActivate: [AuthGuard],
   },
   {
