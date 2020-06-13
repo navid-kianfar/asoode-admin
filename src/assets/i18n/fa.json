@@ -61,5 +61,8 @@
   "TYPE": "نوع",
   "CODE": "کد",
   "CREATE": "ایجاد",
-  "DISCOUNTS": "تخفیف"
+  "DISCOUNTS": "تخفیف",
+  "ENUMS_TRANSACTION_STATUS_CANCELED": "کنسل شده",
+  "ENUMS_TRANSACTION_STATUS_PENDING": "در انتظار پرداخت",
+  "ENUMS_TRANSACTION_STATUS_SUCCESS": "پرداخت شده"
 }
