@@ -1,4 +1,5 @@
 .af-grid {
+  overflow-x: auto;
   .extra {
     display: flex;
     justify-content: space-between;
@@ -46,7 +47,7 @@
         background: none;
 
         i {
-          font-size: 20px;
+          font-size: 18px;
           color: #777;
           cursor: pointer;
         }

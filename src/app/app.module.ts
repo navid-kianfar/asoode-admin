@@ -98,6 +98,9 @@ import { ErrorsComponent } from './pages/errors/errors.component';
 import { MarketersComponent } from './pages/marketers/marketers.component';
 import { ErrorModalComponent } from './modals/error/error-modal.component';
 import { DiscountsComponent } from './pages/discounts/discounts.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -205,6 +208,9 @@ import { DiscountsComponent } from './pages/discounts/discounts.component';
     TrendModule,
     DragDropModule,
     ColorPickerModule,
+    MatIconModule,
+    MatListModule,
+    MatSidenavModule,
   ],
   providers: [
     // {

@@ -4,7 +4,40 @@
     *ngIf="!appInitializerProvider.loaded"
   ></app-waiting>
   <ng-container *ngIf="appInitializerProvider.loaded">
-    <app-header *ngIf="appInitializerProvider.profileLoaded"></app-header>
-    <router-outlet></router-outlet>
+    <app-header [sidenav]="sidenav" *ngIf="appInitializerProvider.profileLoaded"></app-header>
+    <mat-sidenav-container>
+      <mat-sidenav #sidenav>
+        <mat-nav-list>
+
+          <a mat-list-item routerLinkActive="selected" routerLink="/users">
+            {{ 'USERS' | translate }}
+          </a>
+          <a mat-list-item routerLinkActive="selected" routerLink="/discounts">
+            {{ 'DISCOUNTS' | translate }}
+          </a>
+          <a mat-list-item routerLinkActive="selected" routerLink="/transactions">
+            {{ 'TRANSACTIONS' | translate }}
+          </a>
+          <a mat-list-item routerLinkActive="selected" routerLink="/plans">
+            {{ 'PLANS' | translate }}
+          </a>
+          <a mat-list-item routerLinkActive="selected" routerLink="/blog">
+            {{ 'BLOG' | translate }}
+          </a>
+          <a mat-list-item routerLinkActive="selected" routerLink="/marketers">
+            {{ 'MARKETERS' | translate }}
+          </a>
+          <a mat-list-item routerLinkActive="selected" routerLink="/errors">
+            {{ 'ERRORS' | translate }}
+          </a>
+
+        </mat-nav-list>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <div style="min-height: calc(100vh - 64px)">
+          <router-outlet></router-outlet>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
   </ng-container>
 </div>

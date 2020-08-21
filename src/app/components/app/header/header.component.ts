@@ -1,7 +1,7 @@
 import {
   AfterViewInit,
   Component,
-  ElementRef,
+  ElementRef, Input,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -17,6 +17,7 @@ import { OperationResult } from '../../../library/core/operation-result';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  @Input() sidenav: any;
   loading: boolean;
   constructor(
     public readonly identityService: IdentityService,
