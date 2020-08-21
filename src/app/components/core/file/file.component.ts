@@ -11,7 +11,6 @@ import {
   FileType,
   OperationResultStatus,
 } from '../../../library/core/enums';
-import { ListViewModel } from '../../../view-models/core/list-types';
 import { HttpService } from '../../../services/core/http.service';
 import { TranslateService } from '../../../services/core/translate.service';
 
@@ -22,29 +21,29 @@ import { TranslateService } from '../../../services/core/translate.service';
 })
 export class FileComponent implements OnInit {
   @ViewChild('filePicker', { static: false }) filePicker;
+  @Input() browse: string;
   @Input() backend: string;
+  @Input() backendParams?: any;
   @Input() summary: string;
   @Input() extensions: string[];
   @Input() cssClass: string;
   @Input() disabled: boolean;
-  @Input() backendParams?: any;
-  @Input() data: any;
   @Input() uploadOnPick: boolean;
   @Input() clearAfterUpload: boolean;
   @Input() current: string;
   @Input() multiple: boolean;
   @Input() preview: boolean;
   @Input() fileType: FileType;
-  @Input() placeHolder: string;
   @Input() thumbnail: boolean;
+  @Input() placeHolder: string;
   @Input() thumbnailLabel: string;
   @Input() thumbnailIcon: string;
-  @Input() model: File[];
+  @Input() model: File | File[];
   @Output() onStart = new EventEmitter<void>();
   @Output() onError = new EventEmitter<void>();
   @Output() onProgress = new EventEmitter<number>();
   @Output() onFinished = new EventEmitter<void>();
-  @Output() modelChange = new EventEmitter<File[]>();
+  @Output() modelChange = new EventEmitter<File | File[]>();
   @Output() currentChange = new EventEmitter<string | string[]>();
   selectedFiles: File[];
   uploadPercent: number;
@@ -58,7 +57,7 @@ export class FileComponent implements OnInit {
 
   get inputText(): string {
     if (!this.selectedFiles.length) {
-      return this.translateService.fromKey('CORE.NO_FILES_SELECTED');
+      return this.translateService.fromKey('NO_FILES_SELECTED');
     }
     if (!this.multiple) {
       return this.selectedFiles[0].name;
@@ -108,7 +107,7 @@ export class FileComponent implements OnInit {
     this.uploadPercent = 0;
     this.uploading = true;
     this.onStart.emit();
-    const data = { ...this.data, file: this.model };
+    const data = { ...this.backendParams, file: this.model };
     const op = await this.httpService.formUpload<any>(
       this.backend,
       data,
@@ -160,7 +159,11 @@ export class FileComponent implements OnInit {
     for (let i = 0; i < files.length; i++) {
       this.selectedFiles.push(files.item(i));
     }
-    this.model = [...this.selectedFiles];
+    if (this.multiple) {
+      this.model = [...this.selectedFiles];
+    } else {
+      this.model = this.selectedFiles[0];
+    }
     this.modelChange.emit(this.model);
     if (this.selectedFiles.length) {
       this.current = this.selectedFiles[0].name;
