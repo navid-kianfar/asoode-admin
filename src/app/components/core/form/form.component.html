@@ -126,6 +126,42 @@
                   ></app-number>
                 </ng-container>
 
+                <!-- TimePicker -->
+                <ng-container
+                  *ngIf="element.type === FormElementType.TimePicker"
+                >
+                  <app-time-picker
+                    [cssClass]="element.config.cssClass"
+                    [disabled]="checkDisabled(group, element)"
+                    [(model)]="element.params.model"
+                  ></app-time-picker>
+                </ng-container>
+
+                <!-- DatePicker -->
+                <ng-container
+                  *ngIf="element.type === FormElementType.DatePicker"
+                >
+                  <app-date-picker
+                    [cssClass]="element.config.cssClass"
+                    [disabled]="checkDisabled(group, element)"
+                    [(model)]="element.params.model"
+                    [allowNull]="element.params.allowNull"
+                    [culture]="element.params.culture"
+                    [from]="element.params.from"
+                    [fromToday]="element.params.fromToday"
+                    [maxDays]="element.params.maxDays"
+                    [maxMonths]="element.params.maxMonths"
+                    [maxYears]="element.params.maxYears"
+                    [minDays]="element.params.minDays"
+                    [minMonths]="element.params.minMonths"
+                    [minYears]="element.params.minYears"
+                    [pickButton]="element.params.pickButton"
+                    [plateOpen]="element.params.plateOpen"
+                    [tillToday]="element.params.tillToday"
+                    [to]="element.params.to"
+                  ></app-date-picker>
+                </ng-container>
+
                 <!-- DropDown -->
                 <ng-container *ngIf="element.type === FormElementType.DropDown">
                   <app-dropdown
@@ -133,6 +169,8 @@
                     [disabled]="checkDisabled(group, element)"
                     [(model)]="element.params.model"
                     [(items)]="element.params.items"
+                    (picked)="element.params.picked($event)"
+                    [enumInfo]="element.params.enumInfo"
                     [ltr]="element.params.ltr"
                     [allowClear]="element.params.allowClear"
                     [backend]="element.params.backend"
@@ -150,12 +188,28 @@
                 <!-- File -->
                 <ng-container *ngIf="element.type === FormElementType.File">
                   <app-file
+                    [(model)]="element.params.model"
+                    [preview]="element.params.preview"
+                    [(current)]="element.params.current"
                     [cssClass]="element.config.cssClass"
                     [disabled]="checkDisabled(group, element)"
-                    [(model)]="element.params.model"
                     [placeHolder]="element.params.placeHolder"
                     [backend]="element.params.backend"
+                    [browse]="element.params.browse"
                     [backendParams]="element.params.backendParams"
+                    [clearAfterUpload]="element.params.clearAfterUpload"
+                    [extensions]="element.params.extensions"
+                    [fileType]="element.params.fileType"
+                    [multiple]="element.params.multiple"
+                    [summary]="element.params.summary"
+                    [thumbnail]="element.params.thumbnail"
+                    [thumbnailIcon]="element.params.thumbnailIcon"
+                    [thumbnailLabel]="element.params.thumbnailLabel"
+                    [uploadOnPick]="element.params.uploadOnPick"
+                    (onError)="element.params.onError($event)"
+                    (onFinished)="element.params.onFinished($event)"
+                    (onProgress)="element.params.onProgress($event)"
+                    (onStart)="element.params.onStart($event)"
                   ></app-file>
                 </ng-container>
 

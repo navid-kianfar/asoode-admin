@@ -1,7 +1,9 @@
 import {
   DropdownKnownList,
+  FileType,
   FormElementType,
 } from '../../../library/core/enums';
+import { EventEmitter, Input, Output } from '@angular/core';
 
 export interface FormViewModel {
   disabled?: boolean;
@@ -12,11 +14,47 @@ export interface FormViewModel {
   elements: IFormElement[];
 }
 
+export interface IFormElementFilePicker extends IFormElement {
+  params: {
+    model?: File | File[];
+    disabled?: boolean;
+    placeHolder?: string;
+    backend?: string;
+    browse?: string;
+    backendParams?: any;
+    summary?: string;
+    extensions?: string[];
+    cssClass?: string;
+    data?: any;
+    uploadOnPick?: boolean;
+    clearAfterUpload?: boolean;
+    current?: string;
+    multiple?: boolean;
+    preview?: boolean;
+    fileType?: FileType;
+    thumbnail?: boolean;
+    thumbnailLabel?: string;
+    thumbnailIcon?: string;
+    onStart?: EventEmitter<void>;
+    onError?: EventEmitter<void>;
+    onProgress?: EventEmitter<number>;
+    onFinished?: EventEmitter<void>;
+    modelChange?: EventEmitter<File | File[]>;
+    currentChange?: EventEmitter<string | string[]>;
+  };
+}
 export interface IFormElementNumber extends IFormElement {
   validation?: IFormElementNumberValidation;
   params: {
     disabled?: boolean;
     model: number;
+  };
+}
+export interface IFormElementTimePicker extends IFormElement {
+  validation?: IFormElementTimePickerValidation;
+  params: {
+    disabled?: boolean;
+    model: string;
   };
 }
 export interface IFormElementCheckbox extends IFormElement {
@@ -97,15 +135,31 @@ export interface IFormElementDatePicker extends IFormElement {
   params: {
     min?: Date;
     max?: Date;
-    model: Date;
     culture?: string;
     disabled?: boolean;
+    model: Date;
+    cssClass?: string;
+    allowNull?: boolean;
+    pickButton?: boolean;
+    plateOpen?: boolean;
+    from?: Date;
+    to?: Date;
+    minDays?: number;
+    minMonths?: number;
+    minYears?: number;
+    maxDays?: number;
+    maxMonths?: number;
+    maxYears?: number;
+    fromToday?: boolean;
+    tillToday?: boolean;
   };
 }
 export interface IFormElementDropDown extends IFormElement {
   params: {
+    picked?: (val) => void;
     model: any;
     items: any[];
+    enumInfo?: boolean;
     ltr?: boolean;
     disabled?: boolean;
     label?: string;
@@ -119,15 +173,6 @@ export interface IFormElementDropDown extends IFormElement {
     backendParams?: any;
     enumExcept?: number;
     knownList?: DropdownKnownList;
-  };
-}
-export interface IFormElementFilePicker extends IFormElement {
-  params: {
-    model?: File | File[];
-    disabled?: boolean;
-    placeHolder?: string;
-    backend?: string;
-    backendParams?: any;
   };
 }
 export interface IFormElementConfiguration {
@@ -151,6 +196,11 @@ export interface IFormElementStringValidation extends IFormElementValidation {
   pattern?: { value: RegExp; message: string };
 }
 export interface IFormElementNumberValidation extends IFormElementValidation {
+  min?: { value: number; message: string };
+  max?: { value: number; message: string };
+}
+export interface IFormElementTimePickerValidation
+  extends IFormElementValidation {
   min?: { value: number; message: string };
   max?: { value: number; message: string };
 }
