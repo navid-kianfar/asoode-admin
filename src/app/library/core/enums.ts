@@ -41,6 +41,7 @@ export enum FormElementType {
   Verification = 17,
   Label = 18,
   Number = 19,
+  TimePicker = 20,
 }
 export enum FileType {
   Any = 1,
