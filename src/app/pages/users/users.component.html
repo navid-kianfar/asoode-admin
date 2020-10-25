@@ -1,6 +1,7 @@
 <div class="users-container">
   <div class="box">
     <app-grid
+      [commander]="commander"
       filter="true"
       backend="/admin/user/list"
       [columns]="['index', 'fullName', 'createdAt', 'phone', 'email', 'action']"
@@ -70,11 +71,17 @@
           <button (click)="plan(element)">
             <i class="ikon-flag2"></i>
           </button>
-          <button (click)="import(element)">
-            <i class="ikon-users4"></i>
+<!--          <button (click)="import(element)">-->
+<!--            <i class="ikon-users4"></i>-->
+<!--          </button>-->
+<!--          <button (click)="transactions(element)">-->
+<!--            <i class="ikon-coin-dollar"></i>-->
+<!--          </button>-->
+          <button (click)="confirm(element)">
+            <i class="ikon-user-check"></i>
           </button>
-          <button (click)="transactions(element)">
-            <i class="ikon-coin-dollar"></i>
+          <button (click)="block(element)">
+            <i class="ikon-user-block"></i>
           </button>
         </td>
       </ng-container>

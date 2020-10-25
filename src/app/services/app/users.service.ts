@@ -25,4 +25,16 @@ export class UsersService {
       model,
     );
   }
+
+  async confirm(id: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      '/admin/user/confirm/' + id,
+    );
+  }
+
+  async block(id: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      '/admin/user/block/' + id,
+    );
+  }
 }

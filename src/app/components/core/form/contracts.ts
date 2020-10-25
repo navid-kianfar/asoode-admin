@@ -171,7 +171,7 @@ export interface IFormElementDropDown extends IFormElement {
     waiting?: boolean;
     allowClear?: boolean;
     backendParams?: any;
-    enumExcept?: number;
+    enumExcept?: number[];
     knownList?: DropdownKnownList;
   };
 }

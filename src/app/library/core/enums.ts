@@ -64,6 +64,8 @@ export enum CalendarType {
   Hijri = 3,
 }
 export enum UserType {
+  Admin = 1,
   User = 2,
   Marketer = 3,
+  Anonymous = 10,
 }

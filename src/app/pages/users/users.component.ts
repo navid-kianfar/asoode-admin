@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormViewModel } from '../../components/core/form/contracts';
 import { CostUnit, PlanType } from '../../library/app/enums';
 import { ModalService } from '../../services/core/modal.service';
 import { FormService } from '../../services/core/form.service';
 import { PromptComponent } from '../../modals/prompt/prompt.component';
-import { OperationResultStatus } from '../../library/core/enums';
+import { OperationResultStatus, UserType } from '../../library/core/enums';
 import { PlanService } from '../../services/app/plan.service';
 import { UsersService } from '../../services/app/users.service';
+import { GridCommand } from '../../view-models/core/grid-types';
 
 @Component({
   selector: 'app-users',
@@ -14,6 +15,7 @@ import { UsersService } from '../../services/app/users.service';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
+  commander = new EventEmitter<GridCommand<any>>();
   constructor(
     private readonly modalService: ModalService,
     private readonly formService: FormService,
@@ -388,7 +390,16 @@ export class UsersComponent implements OnInit {
               }),
             ],
           },
-        ],
+          {
+            size: 6,
+            elements: [
+              this.formService.createDropDown({
+                config: { field: 'type', label: 'USER_TYPE' },
+                params: { model: element.type, items: [], enum: 'UserType', enumExcept: [UserType.Anonymous] }
+              })
+            ]
+          }
+        ] as FormViewModel[],
         actionLabel: 'EDIT_USER',
         action: async (model, form) => {
           const op = await this.usersService.edit(element.id, model);
@@ -409,4 +420,34 @@ export class UsersComponent implements OnInit {
   import(element: any) {}
 
   transactions(element: any) {}
+
+  confirm(element: any) {
+    this.modalService.confirm({
+      title: 'USERS_CONFIRM_TITLE',
+      message: 'USERS_CONFIRM_CONFIRM',
+      action: async () => {
+        const op = await this.usersService.confirm(element.id);
+        if (op.status !== OperationResultStatus.Success) {
+          // TODO: handle error
+          return;
+        }
+        this.commander.emit({reload: true});
+      },
+    });
+  }
+
+  block(element: any) {
+    this.modalService.confirm({
+      title: 'USERS_BLOCK_TITLE',
+      message: 'USERS_BLOCK_CONFIRM',
+      action: async () => {
+        const op = await this.usersService.block(element.id);
+        if (op.status !== OperationResultStatus.Success) {
+          // TODO: handle error
+          return;
+        }
+        this.commander.emit({reload: true});
+      },
+    });
+  }
 }
