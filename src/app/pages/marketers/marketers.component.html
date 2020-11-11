@@ -65,6 +65,11 @@
           <button (click)="prepareEdit(element)">
             <i class="ikon-pen5"></i>
           </button>
+          <button (click)="toggleStatus(element)">
+            <i
+              class="{{ element.enabled ? 'ikon-unlocked2' : 'ikon-lock5' }}"
+            ></i>
+          </button>
         </td>
       </ng-container>
     </app-grid>

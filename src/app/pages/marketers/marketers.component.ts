@@ -8,6 +8,7 @@ import { OperationResultStatus } from '../../library/core/enums';
 import { PromptComponent } from '../../modals/prompt/prompt.component';
 import { MarketerService } from '../../services/app/marketer.service';
 import { GridCommand } from '../../view-models/core/grid-types';
+import { OperationResult } from '../../library/core/operation-result';
 
 @Component({
   selector: 'app-marketers',
@@ -71,6 +72,18 @@ export class MarketersComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  prepareDelete(element: any) {
+    this.modalService
+      .confirm({ action: async () => OperationResult.Success(true) })
+      .subscribe(async confirmed => {
+        if (!confirmed) { return; }
+        const op = await this.marketerService.remove(element.id);
+        if (op.status === OperationResultStatus.Success) {
+          this.commander.emit({reload: true});
+        }
+      });
+  }
 
   async toggleStatus(element: any) {
     const op = await this.marketerService.toggle(element.id);
