@@ -4,6 +4,7 @@
       filter="true"
       create="true"
       backend="/admin/marketers/list"
+      (onCreate)="prepareCreate()"
       [columns]="['index', 'createdAt', 'code', 'fullName', 'action']"
     >
       <!-- Index Column -->

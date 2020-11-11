@@ -101,6 +101,9 @@ import { DiscountsComponent } from './pages/discounts/discounts.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { PERSIAN_DATE_FORMATS, PersianDateAdapter } from './library/core/date-time/persian-date-adapter';
 
 @NgModule({
   declarations: [
@@ -211,12 +214,16 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatIconModule,
     MatListModule,
     MatSidenavModule,
+    MatDatepickerModule,
   ],
   providers: [
-    // {
-    //   provide: LocationStrategy,
-    //   useClass: HashLocationStrategy,
-    // },
+    {
+      provide: DateAdapter,
+      useClass: PersianDateAdapter,
+      deps: [MAT_DATE_LOCALE]
+    },
+    { provide: MAT_DATE_FORMATS, useValue: PERSIAN_DATE_FORMATS },
+
     CookieService,
     {
       provide: HTTP_INTERCEPTORS,

@@ -30,6 +30,9 @@
           <a mat-list-item routerLinkActive="selected" routerLink="/errors">
             {{ 'ERRORS' | translate }}
           </a>
+          <a mat-list-item (click)="logout()" href="javascript:void(0)">
+            {{ 'EXIT' | translate }}
+          </a>
 
         </mat-nav-list>
       </mat-sidenav>
