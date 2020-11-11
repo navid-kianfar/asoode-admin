@@ -24,7 +24,50 @@ export class MarketersComponent implements OnInit {
   ) {}
 
   private createForm(): FormViewModel[] {
-    return [];
+    return [
+      {
+        elements: [
+          this.formService.createInput({
+            config: { field: 'title', label: 'TITLE' },
+            params: { model: '' },
+            validation: {
+              required: {
+                value: true,
+                message: 'TITLE_REQUIRED'
+              }
+            }
+          }),
+          this.formService.createInput({
+            config: { field: 'description', label: 'DESCRIPTION' },
+            params: { model: '', textArea: true },
+            validation: {
+              required: {
+                value: true,
+                message: 'DESCRIPTION_REQUIRED'
+              }
+            }
+          }),
+          this.formService.createInput({
+            config: { field: 'code', label: 'CODE' },
+            params: { model: '' },
+            validation: {
+              required: {
+                value: true,
+                message: 'CODE_REQUIRED'
+              }
+            }
+          }),
+          this.formService.createInput({
+            config: { field: 'fixed', label: 'FIXED' },
+            params: { model: '', numeric: true }
+          }),
+          this.formService.createNumber({
+            config: { field: 'percent', label: 'PERCENT' },
+            params: { model: 0 }
+          }),
+        ]
+      }
+    ];
   }
 
   ngOnInit() {}
