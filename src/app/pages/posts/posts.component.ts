@@ -102,6 +102,10 @@ export class PostsComponent implements OnInit {
               placeHolder: 'LARGE_IMAGE',
             },
           }),
+          this.formService.createNumber({
+            config: { field: 'priority', label: 'PRIORITY' },
+            params: { model: 0 }
+          })
         ],
       },
     ];
