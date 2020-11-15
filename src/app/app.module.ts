@@ -217,7 +217,7 @@ import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-go
     MatSidenavModule,
     MatDatepickerModule,
     NgxGoogleAnalyticsModule.forRoot('G-K4SKBN8BK9'),
-    NgxGoogleAnalyticsRouterModule
+    // NgxGoogleAnalyticsRouterModule
   ],
   providers: [
     {
