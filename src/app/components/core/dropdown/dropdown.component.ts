@@ -135,7 +135,12 @@ export class DropdownComponent implements OnInit, OnChanges {
         if (this.enumExcept.indexOf(enumObj[key]) !== -1) {
           return;
         }
-        items.push({ text, separator: false, value: enumObj[key], description });
+        items.push({
+          text,
+          separator: false,
+          value: enumObj[key],
+          description,
+        });
       });
       this.items = items;
     }

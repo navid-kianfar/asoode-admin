@@ -25,7 +25,7 @@ export class PlansComponent implements OnInit {
     private readonly modalService: ModalService,
     private readonly formService: FormService,
     private readonly identityService: IdentityService,
-    private readonly gaService: GoogleAnalyticsService
+    private readonly gaService: GoogleAnalyticsService,
   ) {}
 
   private createForm(): FormViewModel[] {
@@ -258,9 +258,14 @@ export class PlansComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.gaService.pageView('/plans', this.translateService.fromKey('PLANS'), undefined, {
-      user_id: this.identityService.identity.userId
-    });
+    this.gaService.pageView(
+      '/plans',
+      this.translateService.fromKey('PLANS'),
+      undefined,
+      {
+        user_id: this.identityService.identity.userId,
+      },
+    );
   }
 
   async toggleStatus(element: any) {

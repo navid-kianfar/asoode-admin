@@ -12,12 +12,17 @@ export class CmsComponent implements OnInit {
   constructor(
     private readonly translateService: TranslateService,
     private readonly identityService: IdentityService,
-    private readonly gaService: GoogleAnalyticsService
+    private readonly gaService: GoogleAnalyticsService,
   ) {}
 
   ngOnInit() {
-    this.gaService.pageView('/cms', this.translateService.fromKey('CMS'), undefined, {
-      user_id: this.identityService.identity.userId
-    });
+    this.gaService.pageView(
+      '/cms',
+      this.translateService.fromKey('CMS'),
+      undefined,
+      {
+        user_id: this.identityService.identity.userId,
+      },
+    );
   }
 }

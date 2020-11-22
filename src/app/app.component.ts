@@ -23,11 +23,13 @@ export class AppComponent {
   }
 
   logout() {
-    this.modalService.confirm({
-      action: async () => {
-        this.identityService.logout();
-        setTimeout(() => window.location.href = '/', 1000);
-      }
-    }).subscribe(() => {});
+    this.modalService
+      .confirm({
+        action: async () => {
+          this.identityService.logout();
+          setTimeout(() => (window.location.href = '/'), 1000);
+        },
+      })
+      .subscribe(() => {});
   }
 }

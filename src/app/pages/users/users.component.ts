@@ -26,13 +26,18 @@ export class UsersComponent implements OnInit {
     private readonly usersService: UsersService,
     private readonly translateService: TranslateService,
     private readonly identityService: IdentityService,
-    private readonly gaService: GoogleAnalyticsService
+    private readonly gaService: GoogleAnalyticsService,
   ) {}
 
   ngOnInit() {
-    this.gaService.pageView('/users', this.translateService.fromKey('USERS'), undefined, {
-      user_id: this.identityService.identity.userId
-    });
+    this.gaService.pageView(
+      '/users',
+      this.translateService.fromKey('USERS'),
+      undefined,
+      {
+        user_id: this.identityService.identity.userId,
+      },
+    );
   }
 
   private createForm(plan): FormViewModel[] {
@@ -405,10 +410,15 @@ export class UsersComponent implements OnInit {
             elements: [
               this.formService.createDropDown({
                 config: { field: 'type', label: 'USER_TYPE' },
-                params: { model: element.type, items: [], enum: 'UserType', enumExcept: [UserType.Anonymous] }
-              })
-            ]
-          }
+                params: {
+                  model: element.type,
+                  items: [],
+                  enum: 'UserType',
+                  enumExcept: [UserType.Anonymous],
+                },
+              }),
+            ],
+          },
         ] as FormViewModel[],
         actionLabel: 'EDIT_USER',
         action: async (model, form) => {
@@ -441,7 +451,7 @@ export class UsersComponent implements OnInit {
           // TODO: handle error
           return;
         }
-        this.commander.emit({reload: true});
+        this.commander.emit({ reload: true });
       },
     });
   }
@@ -456,7 +466,7 @@ export class UsersComponent implements OnInit {
           // TODO: handle error
           return;
         }
-        this.commander.emit({reload: true});
+        this.commander.emit({ reload: true });
       },
     });
   }

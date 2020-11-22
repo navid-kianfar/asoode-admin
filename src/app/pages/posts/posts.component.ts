@@ -35,10 +35,15 @@ export class PostsComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params.id;
-    this.gaService.pageView('/posts', this.translateService.fromKey('POSTS'), undefined, {
-      id: this.id,
-      user_id: this.identityService.identity.userId
-    });
+    this.gaService.pageView(
+      '/posts',
+      this.translateService.fromKey('POSTS'),
+      undefined,
+      {
+        id: this.id,
+        user_id: this.identityService.identity.userId,
+      },
+    );
   }
 
   createForm() {
@@ -112,8 +117,8 @@ export class PostsComponent implements OnInit {
           }),
           this.formService.createNumber({
             config: { field: 'priority', label: 'PRIORITY' },
-            params: { model: 0 }
-          })
+            params: { model: 0 },
+          }),
         ],
       },
     ];

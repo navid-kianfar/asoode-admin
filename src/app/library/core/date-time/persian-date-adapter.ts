@@ -3,19 +3,17 @@ import { DateAdapter } from '@angular/material/core';
 
 export const PERSIAN_DATE_FORMATS = {
   parse: {
-    dateInput: 'jYYYY/jMM/jDD'
+    dateInput: 'jYYYY/jMM/jDD',
   },
   display: {
     dateInput: 'jYYYY/jMM/jDD',
     monthYearLabel: 'jYYYY jMMMM',
     dateA11yLabel: 'jYYYY/jMM/jDD',
-    monthYearA11yLabel: 'jYYYY jMMMM'
-  }
+    monthYearA11yLabel: 'jYYYY jMMMM',
+  },
 };
 
-export class PersianDateAdapter extends DateAdapter<
-  jalaliMoment.Moment
-> {
+export class PersianDateAdapter extends DateAdapter<jalaliMoment.Moment> {
   constructor() {
     super();
     super.setLocale('fa');
@@ -98,7 +96,7 @@ export class PersianDateAdapter extends DateAdapter<
   createDate(year: number, month: number, date: number): jalaliMoment.Moment {
     if (month < 0 || month > 11) {
       throw Error(
-        `Invalid month index "${month}". Month index has to be between 0 and 11.`
+        `Invalid month index "${month}". Month index has to be between 0 and 11.`,
       );
     }
     if (date < 1) {
@@ -131,7 +129,7 @@ export class PersianDateAdapter extends DateAdapter<
 
   parse(
     value: any,
-    parseFormat: string | string[]
+    parseFormat: string | string[],
   ): jalaliMoment.Moment | null {
     if (value && typeof value === 'string') {
       return jalaliMoment(value, parseFormat, 'fa');
@@ -149,21 +147,21 @@ export class PersianDateAdapter extends DateAdapter<
 
   addCalendarYears(
     date: jalaliMoment.Moment,
-    years: number
+    years: number,
   ): jalaliMoment.Moment {
     return this.clone(date).add(years, 'jYear');
   }
 
   addCalendarMonths(
     date: jalaliMoment.Moment,
-    months: number
+    months: number,
   ): jalaliMoment.Moment {
     return this.clone(date).add(months, 'jmonth');
   }
 
   addCalendarDays(
     date: jalaliMoment.Moment,
-    days: number
+    days: number,
   ): jalaliMoment.Moment {
     return this.clone(date).add(days, 'jDay');
   }

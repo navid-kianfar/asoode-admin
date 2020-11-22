@@ -15,12 +15,17 @@ export class DashboardComponent implements OnInit {
   constructor(
     private readonly translateService: TranslateService,
     private readonly identityService: IdentityService,
-    private readonly gaService: GoogleAnalyticsService
+    private readonly gaService: GoogleAnalyticsService,
   ) {}
 
   ngOnInit() {
-    this.gaService.pageView('/dashboard', this.translateService.fromKey('DASHBOARD'), undefined, {
-      user_id: this.identityService.identity.userId
-    });
+    this.gaService.pageView(
+      '/dashboard',
+      this.translateService.fromKey('DASHBOARD'),
+      undefined,
+      {
+        user_id: this.identityService.identity.userId,
+      },
+    );
   }
 }

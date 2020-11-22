@@ -3,11 +3,10 @@ import { HttpService } from '../core/http.service';
 import { OperationResult } from '../../library/core/operation-result';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DiscountsService {
-
-  constructor(private readonly httpService: HttpService) { }
+  constructor(private readonly httpService: HttpService) {}
 
   async delete(id: any): Promise<OperationResult<boolean>> {
     return this.httpService.post<boolean>('/admin/discounts/delete/' + id);

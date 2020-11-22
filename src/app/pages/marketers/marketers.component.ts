@@ -29,9 +29,14 @@ export class MarketersComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.gaService.pageView('/marketers', this.translateService.fromKey('MARKETERS'), undefined, {
-      user_id: this.identityService.identity.userId
-    });
+    this.gaService.pageView(
+      '/marketers',
+      this.translateService.fromKey('MARKETERS'),
+      undefined,
+      {
+        user_id: this.identityService.identity.userId,
+      },
+    );
   }
 
   private createForm(): FormViewModel[] {
@@ -44,9 +49,9 @@ export class MarketersComponent implements OnInit {
             validation: {
               required: {
                 value: true,
-                message: 'TITLE_REQUIRED'
-              }
-            }
+                message: 'TITLE_REQUIRED',
+              },
+            },
           }),
           this.formService.createInput({
             config: { field: 'description', label: 'DESCRIPTION' },
@@ -54,9 +59,9 @@ export class MarketersComponent implements OnInit {
             validation: {
               required: {
                 value: true,
-                message: 'DESCRIPTION_REQUIRED'
-              }
-            }
+                message: 'DESCRIPTION_REQUIRED',
+              },
+            },
           }),
           this.formService.createInput({
             config: { field: 'code', label: 'CODE' },
@@ -64,32 +69,33 @@ export class MarketersComponent implements OnInit {
             validation: {
               required: {
                 value: true,
-                message: 'CODE_REQUIRED'
-              }
-            }
+                message: 'CODE_REQUIRED',
+              },
+            },
           }),
           this.formService.createInput({
             config: { field: 'fixed', label: 'FIXED' },
-            params: { model: '', numeric: true }
+            params: { model: '', numeric: true },
           }),
           this.formService.createNumber({
             config: { field: 'percent', label: 'PERCENT' },
-            params: { model: 0 }
+            params: { model: 0 },
           }),
-        ]
-      }
+        ],
+      },
     ];
   }
-
 
   prepareDelete(element: any) {
     this.modalService
       .confirm({ action: async () => OperationResult.Success(true) })
       .subscribe(async confirmed => {
-        if (!confirmed) { return; }
+        if (!confirmed) {
+          return;
+        }
         const op = await this.marketerService.remove(element.id);
         if (op.status === OperationResultStatus.Success) {
-          this.commander.emit({reload: true});
+          this.commander.emit({ reload: true });
         }
       });
   }

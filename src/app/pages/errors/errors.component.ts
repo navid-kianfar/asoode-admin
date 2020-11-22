@@ -21,23 +21,30 @@ export class ErrorsComponent implements OnInit {
     private readonly errorsService: ErrorsService,
     private readonly translateService: TranslateService,
     private readonly identityService: IdentityService,
-    private readonly gaService: GoogleAnalyticsService
+    private readonly gaService: GoogleAnalyticsService,
   ) {}
 
   ngOnInit() {
-    this.gaService.pageView('/errors', this.translateService.fromKey('ERRORS'), undefined, {
-      user_id: this.identityService.identity.userId
-    });
+    this.gaService.pageView(
+      '/errors',
+      this.translateService.fromKey('ERRORS'),
+      undefined,
+      {
+        user_id: this.identityService.identity.userId,
+      },
+    );
   }
 
   prepareDelete(element: any) {
     this.modalService
       .confirm({ action: async () => OperationResult.Success(true) })
       .subscribe(async confirmed => {
-        if (!confirmed) { return; }
+        if (!confirmed) {
+          return;
+        }
         const op = await this.errorsService.delete(element.id);
         if (op.status === OperationResultStatus.Success) {
-          this.commander.emit({reload: true});
+          this.commander.emit({ reload: true });
         }
       });
   }

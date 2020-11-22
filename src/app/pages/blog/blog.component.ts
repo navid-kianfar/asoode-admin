@@ -28,13 +28,18 @@ export class BlogComponent implements OnInit {
     private readonly formService: FormService,
     private readonly router: Router,
     private readonly identityService: IdentityService,
-    private readonly gaService: GoogleAnalyticsService
+    private readonly gaService: GoogleAnalyticsService,
   ) {}
 
   ngOnInit() {
-    this.gaService.pageView('/blog', this.translateService.fromKey('BLOG'), undefined, {
-      user_id: this.identityService.identity.userId
-    });
+    this.gaService.pageView(
+      '/blog',
+      this.translateService.fromKey('BLOG'),
+      undefined,
+      {
+        user_id: this.identityService.identity.userId,
+      },
+    );
   }
 
   createForm() {

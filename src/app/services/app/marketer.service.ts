@@ -9,10 +9,14 @@ export class MarketerService {
   constructor(private readonly httpService: HttpService) {}
 
   async remove(id: any): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>('/admin/marketers/remove/' + id);
+    return await this.httpService.post<boolean>(
+      '/admin/marketers/remove/' + id,
+    );
   }
   async toggle(id: any): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>('/admin/marketers/toggle/' + id);
+    return await this.httpService.post<boolean>(
+      '/admin/marketers/toggle/' + id,
+    );
   }
   async edit(id: any, model: any): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
@@ -21,6 +25,9 @@ export class MarketerService {
     );
   }
   async create(model: any): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>('/admin/marketers/create/', model);
+    return await this.httpService.post<boolean>(
+      '/admin/marketers/create/',
+      model,
+    );
   }
 }

@@ -15,7 +15,7 @@ import { IdentityService } from '../../services/auth/identity.service';
 @Component({
   selector: 'app-discounts',
   templateUrl: './discounts.component.html',
-  styleUrls: ['./discounts.component.scss']
+  styleUrls: ['./discounts.component.scss'],
 })
 export class DiscountsComponent implements OnInit {
   commander = new EventEmitter<GridCommand<any>>();
@@ -25,23 +25,30 @@ export class DiscountsComponent implements OnInit {
     private readonly formService: FormService,
     private readonly translateService: TranslateService,
     private readonly identityService: IdentityService,
-    private readonly gaService: GoogleAnalyticsService
+    private readonly gaService: GoogleAnalyticsService,
   ) {}
 
   ngOnInit() {
-    this.gaService.pageView('/discounts', this.translateService.fromKey('DISCOUNTS'), undefined, {
-      user_id: this.identityService.identity.userId
-    });
+    this.gaService.pageView(
+      '/discounts',
+      this.translateService.fromKey('DISCOUNTS'),
+      undefined,
+      {
+        user_id: this.identityService.identity.userId,
+      },
+    );
   }
 
   prepareDelete(element: any) {
     this.modalService
       .confirm({ action: async () => OperationResult.Success(true) })
       .subscribe(async confirmed => {
-        if (!confirmed) { return; }
+        if (!confirmed) {
+          return;
+        }
         const op = await this.discountService.delete(element.id);
         if (op.status === OperationResultStatus.Success) {
-          this.commander.emit({reload: true});
+          this.commander.emit({ reload: true });
         }
       });
   }
@@ -95,7 +102,7 @@ export class DiscountsComponent implements OnInit {
             config: { field: 'title' },
             params: {
               model: '',
-              placeHolder: 'TITLE'
+              placeHolder: 'TITLE',
             },
           }),
           this.formService.createInput({
@@ -110,7 +117,7 @@ export class DiscountsComponent implements OnInit {
             config: { field: 'code' },
             params: {
               model: '',
-              placeHolder: 'CODE'
+              placeHolder: 'CODE',
             },
           }),
           this.formService.createDropDown({
@@ -118,7 +125,7 @@ export class DiscountsComponent implements OnInit {
             params: {
               model: CostUnit.Toman,
               items: [],
-              enum: 'CostUnit'
+              enum: 'CostUnit',
             },
           }),
           this.formService.createDropDown({
@@ -127,7 +134,7 @@ export class DiscountsComponent implements OnInit {
               model: undefined,
               items: [],
               backend: '/admin/plan/all',
-              chooseLabel: 'FOR_PLAN'
+              chooseLabel: 'FOR_PLAN',
             },
           }),
         ],
@@ -151,7 +158,7 @@ export class DiscountsComponent implements OnInit {
             config: { field: 'forUser' },
             params: {
               model: undefined,
-              placeHolder: 'FOR_USER'
+              placeHolder: 'FOR_USER',
             },
           }),
           this.formService.createNumber({

@@ -5,7 +5,14 @@
       create="true"
       backend="/admin/marketers/list"
       (onCreate)="prepareCreate()"
-      [columns]="['index', 'createdAt', 'code', 'title', 'description', 'action']"
+      [columns]="[
+        'index',
+        'createdAt',
+        'code',
+        'title',
+        'description',
+        'action'
+      ]"
     >
       <!-- Index Column -->
       <ng-container matColumnDef="index">

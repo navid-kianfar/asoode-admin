@@ -12,12 +12,17 @@ export class TransactionsComponent implements OnInit {
   constructor(
     private readonly translateService: TranslateService,
     private readonly identityService: IdentityService,
-    private readonly gaService: GoogleAnalyticsService
+    private readonly gaService: GoogleAnalyticsService,
   ) {}
 
   ngOnInit() {
-    this.gaService.pageView('/transactions', this.translateService.fromKey('TRANSACTIONS'), undefined, {
-      user_id: this.identityService.identity.userId
-    });
+    this.gaService.pageView(
+      '/transactions',
+      this.translateService.fromKey('TRANSACTIONS'),
+      undefined,
+      {
+        user_id: this.identityService.identity.userId,
+      },
+    );
   }
 }

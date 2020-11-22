@@ -132,7 +132,6 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
 
     this.dataSource = new MatTableDataSource<T>(op.data.items);
 
-
     this.dataSource.paginator = this.paginator;
 
     this.totalItemsChange.emit(this.totalItems);
@@ -140,7 +139,7 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
     this.totalPagesChange.emit(this.totalPages);
 
     setTimeout(() => {
-      this.paginator.length =  this.totalItems;
+      this.paginator.length = this.totalItems;
       this.paginator.pageSize = this.pageSize;
       this.paginator.pageIndex = this.currentPage - 1;
     }, 200);
