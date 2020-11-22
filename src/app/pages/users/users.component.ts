@@ -8,6 +8,9 @@ import { OperationResultStatus, UserType } from '../../library/core/enums';
 import { PlanService } from '../../services/app/plan.service';
 import { UsersService } from '../../services/app/users.service';
 import { GridCommand } from '../../view-models/core/grid-types';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
+import { TranslateService } from '../../services/core/translate.service';
+import { IdentityService } from '../../services/auth/identity.service';
 
 @Component({
   selector: 'app-users',
@@ -21,9 +24,16 @@ export class UsersComponent implements OnInit {
     private readonly formService: FormService,
     private readonly plansService: PlanService,
     private readonly usersService: UsersService,
+    private readonly translateService: TranslateService,
+    private readonly identityService: IdentityService,
+    private readonly gaService: GoogleAnalyticsService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.gaService.pageView('/users', this.translateService.fromKey('USERS'), undefined, {
+      user_id: this.identityService.identity.userId
+    });
+  }
 
   private createForm(plan): FormViewModel[] {
     return [

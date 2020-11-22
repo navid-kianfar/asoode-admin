@@ -8,6 +8,9 @@ import { PromptComponent } from '../../modals/prompt/prompt.component';
 import { FormService } from '../../services/core/form.service';
 import { BlogType, CostUnit } from '../../library/app/enums';
 import { FormViewModel } from '../../components/core/form/contracts';
+import { TranslateService } from '../../services/core/translate.service';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
+import { IdentityService } from '../../services/auth/identity.service';
 
 @Component({
   selector: 'app-discounts',
@@ -20,9 +23,16 @@ export class DiscountsComponent implements OnInit {
     private readonly modalService: ModalService,
     private readonly discountService: DiscountsService,
     private readonly formService: FormService,
+    private readonly translateService: TranslateService,
+    private readonly identityService: IdentityService,
+    private readonly gaService: GoogleAnalyticsService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.gaService.pageView('/discounts', this.translateService.fromKey('DISCOUNTS'), undefined, {
+      user_id: this.identityService.identity.userId
+    });
+  }
 
   prepareDelete(element: any) {
     this.modalService

@@ -8,6 +8,8 @@ import { FormService } from '../../services/core/form.service';
 import { OperationResultStatus } from '../../library/core/enums';
 import { GridCommand } from '../../view-models/core/grid-types';
 import { CostUnit, PlanType } from '../../library/app/enums';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
+import { IdentityService } from '../../services/auth/identity.service';
 
 @Component({
   selector: 'app-plans',
@@ -22,6 +24,8 @@ export class PlansComponent implements OnInit {
     private readonly translateService: TranslateService,
     private readonly modalService: ModalService,
     private readonly formService: FormService,
+    private readonly identityService: IdentityService,
+    private readonly gaService: GoogleAnalyticsService
   ) {}
 
   private createForm(): FormViewModel[] {
@@ -253,7 +257,11 @@ export class PlansComponent implements OnInit {
     ];
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.gaService.pageView('/plans', this.translateService.fromKey('PLANS'), undefined, {
+      user_id: this.identityService.identity.userId
+    });
+  }
 
   async toggleStatus(element: any) {
     const op = await this.plansService.toggle(element.id);

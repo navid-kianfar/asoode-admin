@@ -9,6 +9,8 @@ import { GridCommand } from '../../view-models/core/grid-types';
 import { FormService } from '../../services/core/form.service';
 import { BlogType } from '../../library/app/enums';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
+import { IdentityService } from '../../services/auth/identity.service';
 
 @Component({
   selector: 'app-blog',
@@ -25,9 +27,15 @@ export class BlogComponent implements OnInit {
     private readonly blogService: BlogService,
     private readonly formService: FormService,
     private readonly router: Router,
+    private readonly identityService: IdentityService,
+    private readonly gaService: GoogleAnalyticsService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.gaService.pageView('/blog', this.translateService.fromKey('BLOG'), undefined, {
+      user_id: this.identityService.identity.userId
+    });
+  }
 
   createForm() {
     return [

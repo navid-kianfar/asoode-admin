@@ -104,7 +104,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { PERSIAN_DATE_FORMATS, PersianDateAdapter } from './library/core/date-time/persian-date-adapter';
-import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
+import { GoogleAnalyticsService, NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
 
 @NgModule({
   declarations: [
@@ -217,7 +217,6 @@ import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-go
     MatSidenavModule,
     MatDatepickerModule,
     NgxGoogleAnalyticsModule.forRoot('G-K4SKBN8BK9'),
-    // NgxGoogleAnalyticsRouterModule
   ],
   providers: [
     {
@@ -226,7 +225,7 @@ import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-go
       deps: [MAT_DATE_LOCALE]
     },
     { provide: MAT_DATE_FORMATS, useValue: PERSIAN_DATE_FORMATS },
-
+    GoogleAnalyticsService,
     CookieService,
     {
       provide: HTTP_INTERCEPTORS,

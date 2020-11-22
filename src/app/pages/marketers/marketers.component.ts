@@ -9,6 +9,8 @@ import { PromptComponent } from '../../modals/prompt/prompt.component';
 import { MarketerService } from '../../services/app/marketer.service';
 import { GridCommand } from '../../view-models/core/grid-types';
 import { OperationResult } from '../../library/core/operation-result';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
+import { IdentityService } from '../../services/auth/identity.service';
 
 @Component({
   selector: 'app-marketers',
@@ -19,10 +21,18 @@ export class MarketersComponent implements OnInit {
   commander = new EventEmitter<GridCommand<any>>();
   constructor(
     private readonly translateService: TranslateService,
+    private readonly gaService: GoogleAnalyticsService,
     private readonly modalService: ModalService,
     private readonly formService: FormService,
+    private readonly identityService: IdentityService,
     private readonly marketerService: MarketerService,
   ) {}
+
+  ngOnInit() {
+    this.gaService.pageView('/marketers', this.translateService.fromKey('MARKETERS'), undefined, {
+      user_id: this.identityService.identity.userId
+    });
+  }
 
   private createForm(): FormViewModel[] {
     return [
@@ -71,7 +81,6 @@ export class MarketersComponent implements OnInit {
     ];
   }
 
-  ngOnInit() {}
 
   prepareDelete(element: any) {
     this.modalService

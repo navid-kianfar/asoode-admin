@@ -9,6 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BlogType } from '../../library/app/enums';
 import { PromptComponent } from '../../modals/prompt/prompt.component';
 import { OperationResultStatus } from '../../library/core/enums';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
+import { IdentityService } from '../../services/auth/identity.service';
 
 @Component({
   selector: 'app-posts',
@@ -22,6 +24,8 @@ export class PostsComponent implements OnInit {
   constructor(
     private readonly modalService: ModalService,
     private readonly translateService: TranslateService,
+    private readonly gaService: GoogleAnalyticsService,
+    private readonly identityService: IdentityService,
     private readonly notificationService: NotificationService,
     private readonly blogService: BlogService,
     private readonly formService: FormService,
@@ -31,6 +35,10 @@ export class PostsComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params.id;
+    this.gaService.pageView('/posts', this.translateService.fromKey('POSTS'), undefined, {
+      id: this.id,
+      user_id: this.identityService.identity.userId
+    });
   }
 
   createForm() {

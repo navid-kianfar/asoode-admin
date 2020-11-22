@@ -6,6 +6,8 @@ import { OperationResultStatus } from '../../../library/core/enums';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppInitializerProvider } from '../../../services/general/app.initializer';
 import { environment } from '../../../../environments/environment';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
+import { TranslateService } from '../../../services/core/translate.service';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +29,8 @@ export class LoginComponent implements OnInit {
     private readonly initializerProvider: AppInitializerProvider,
     private readonly formService: FormService,
     private readonly identityService: IdentityService,
+    private readonly translateService: TranslateService,
+    private readonly gaService: GoogleAnalyticsService
   ) {}
 
   ngOnInit() {
@@ -68,6 +72,10 @@ export class LoginComponent implements OnInit {
         ],
       },
     ];
+
+    this.gaService.pageView('/login', this.translateService.fromKey('LOGIN_TO_YOUR_ACCOUNT'), undefined, {
+      user_id: this.identityService.identity.userId
+    });
   }
 
   async login() {
