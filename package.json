@@ -4,9 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build_asoode": "ng build --prod --aot -c=asoode --outputPath ../asoode-deploy/build/admin",
-    "build_alrahah": "ng build --prod --aot -c=alrahah --outputPath ../alrahah-deploy/build/admin",
-    "build_ciblsoft": "ng build --prod --aot -c=ciblsoft --outputPath ../ciblsoft-deploy/build/admin",
+    "build_asoode": "ng build --prod --aot -c=asoode --outputPath ../deploy-asoode/build/admin",
+    "build_alrahah": "ng build --prod --aot -c=alrahah --outputPath ../deploy-alrahah/build/admin",
+    "build_ciblsoft": "ng build --prod --aot -c=ciblsoft --outputPath ../deploy-ciblsoft/build/admin",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
