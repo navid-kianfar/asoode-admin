@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --aot",
+    "build_asoode": "ng build --prod --aot -c=asoode --outputPath ../asoode-deploy/build/admin",
+    "build_alrahah": "ng build --prod --aot -c=alrahah --outputPath ../alrahah-deploy/build/admin",
+    "build_ciblsoft": "ng build --prod --aot -c=ciblsoft --outputPath ../ciblsoft-deploy/build/admin",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
