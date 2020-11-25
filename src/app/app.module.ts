@@ -96,6 +96,7 @@ import {
   NgxGoogleAnalyticsModule,
   NgxGoogleAnalyticsRouterModule,
 } from 'ngx-google-analytics';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -187,7 +188,7 @@ import {
     MatListModule,
     MatSidenavModule,
     MatDatepickerModule,
-    NgxGoogleAnalyticsModule.forRoot('G-K4SKBN8BK9'),
+    NgxGoogleAnalyticsModule.forRoot(environment.ga),
   ],
   providers: [
     {

@@ -73,13 +73,16 @@ export class LoginComponent implements OnInit {
       },
     ];
 
+    let userId = undefined;
+    if (this.identityService.identity)  {
+      userId = this.identityService.identity.userId
+    }
+
     this.gaService.pageView(
       '/login',
       this.translateService.fromKey('LOGIN_TO_YOUR_ACCOUNT'),
       undefined,
-      {
-        user_id: this.identityService.identity.userId,
-      },
+      { user_id: userId },
     );
   }
 

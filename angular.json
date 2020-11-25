@@ -70,6 +70,10 @@
                   "with": "src/environments/environment.alrahah.ts"
                 }
               ],
+              "index": {
+                "input": "src/index-ar.html",
+                "output": "index.html"
+              },
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -99,6 +103,10 @@
                   "with": "src/environments/environment.ciblsoft.ts"
                 }
               ],
+              "index": {
+                "input": "src/index-en.html",
+                "output": "index.html"
+              },
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
