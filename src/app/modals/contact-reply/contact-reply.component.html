@@ -11,12 +11,15 @@
       <h3>{{ email }}</h3>
       <textarea readonly cols="30" rows="6" [ngModel]="message"></textarea>
       <hr>
-      <ng-container *ngIf="waiting">
+      <app-waiting *ngIf="waiting"></app-waiting>
+      <ng-container *ngIf="!waiting">
         <div class="replies">
-          <div class="reply" *ngFor="let reply of replies" [innerText]="reply.message"></div>
+          <ng-container *ngFor="let reply of replies">
+            <div class="reply" [innerText]="reply.message"></div>
+            <hr>
+          </ng-container>
         </div>
       </ng-container>
-      <ng-container *ngIf="!waiting"></ng-container>
       <hr>
       <app-form
         [elements]="form"
