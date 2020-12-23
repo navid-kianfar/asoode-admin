@@ -76,5 +76,8 @@
   "USERS_CONFIRM_TITLE": "تایید کاربر؟",
   "USERS_CONFIRM_CONFIRM": "آیا از انجام این کار اطمینان دارید",
   "CONFIRM": "تایید",
-  "DASHBOARD": "داشبورد"
+  "DASHBOARD": "داشبورد",
+  "CONTACT_US": "تماس با ما",
+  "REPLY_MESSAGE": "متن پاسخ",
+  "SUBMIT": "ارسال"
 }

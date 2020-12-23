@@ -1,0 +1,29 @@
+<div class="outer" (click)="close()">
+  <div class="modal-content contact-reply-modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h4 class="modal-title">&nbsp;</h4>
+      <button (click)="close()">
+        <i class="icon-cross"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <h2>{{ firstName }} {{ lastName }}</h2>
+      <h3>{{ email }}</h3>
+      <textarea readonly cols="30" rows="6" [ngModel]="message"></textarea>
+      <hr>
+      <ng-container *ngIf="waiting">
+        <div class="replies">
+          <div class="reply" *ngFor="let reply of replies" [innerText]="reply.message"></div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!waiting"></ng-container>
+      <hr>
+      <app-form
+        [elements]="form"
+        [actionWaiting]="replyWaiting"
+        [actionLabel]="'SUBMIT'"
+        (action)="submit($event)"
+      ></app-form>
+    </div>
+  </div>
+</div>

@@ -97,6 +97,8 @@ import {
   NgxGoogleAnalyticsRouterModule,
 } from 'ngx-google-analytics';
 import { environment } from '../environments/environment';
+import { ContactUsComponent } from './pages/contact-us/contact-us.component';
+import { ContactReplyComponent } from './modals/contact-reply/contact-reply.component';
 
 @NgModule({
   declarations: [
@@ -146,8 +148,15 @@ import { environment } from '../environments/environment';
     MarketersComponent,
     ErrorModalComponent,
     DiscountsComponent,
+    ContactUsComponent,
+    ContactReplyComponent,
   ],
-  entryComponents: [ConfirmComponent, PromptComponent, ErrorModalComponent],
+  entryComponents: [
+    ConfirmComponent,
+    PromptComponent,
+    ErrorModalComponent,
+    ContactReplyComponent
+  ],
   imports: [
     CKEditorModule,
     BrowserModule,
