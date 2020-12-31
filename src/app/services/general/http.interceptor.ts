@@ -28,7 +28,6 @@ export class HttpInterceptor implements HttpInterceptor {
     }
     request = request.clone({
       setHeaders: {
-        DeviceId: DEVICE_ID,
         Authorization: auth,
         // @ts-ignore
         'ngsw-bypass': 'true'
