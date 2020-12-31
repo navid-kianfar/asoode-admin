@@ -1,23 +1,12 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ViewChild,
-} from '@angular/core';
-import {
-  DropdownKnownList,
-  FileType,
-  OperationResultStatus,
-} from '../../../library/core/enums';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FileType, OperationResultStatus } from '../../../library/core/enums';
 import { HttpService } from '../../../services/core/http.service';
 import { TranslateService } from '../../../services/core/translate.service';
 
 @Component({
   selector: 'app-file',
   templateUrl: './file.component.html',
-  styleUrls: ['./file.component.scss'],
+  styleUrls: ['./file.component.scss']
 })
 export class FileComponent implements OnInit {
   @ViewChild('filePicker', { static: false }) filePicker;
@@ -52,7 +41,7 @@ export class FileComponent implements OnInit {
 
   constructor(
     readonly translateService: TranslateService,
-    readonly httpService: HttpService,
+    readonly httpService: HttpService
   ) {}
 
   get inputText(): string {
@@ -114,7 +103,7 @@ export class FileComponent implements OnInit {
       percent => {
         this.uploadPercent = percent;
         this.onProgress.emit(percent);
-      },
+      }
     );
     this.uploadPercent = 0;
     this.uploading = false;
@@ -146,7 +135,7 @@ export class FileComponent implements OnInit {
     const event = new MouseEvent('click', {
       bubbles: true,
       cancelable: true,
-      view: window,
+      view: window
     });
     this.filePicker.nativeElement.dispatchEvent(event);
   }

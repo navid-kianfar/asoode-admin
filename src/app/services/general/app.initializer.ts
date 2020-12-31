@@ -5,6 +5,8 @@ import { TranslateService } from '../core/translate.service';
 import { IdentityService } from '../auth/identity.service';
 import { EnumsService } from '../core/enums.service';
 import { OperationResultStatus } from '../../library/core/enums';
+import { SwUpdate } from '@angular/service-worker';
+import { interval } from 'rxjs';
 
 @Injectable()
 export class AppInitializerProvider {
@@ -17,35 +19,61 @@ export class AppInitializerProvider {
     private readonly identityService: IdentityService,
     private readonly cultureService: CultureService,
     private readonly enumsService: EnumsService,
+    public readonly swUpdate: SwUpdate
   ) {
     this.loaded = false;
     this.profileLoaded = false;
+    this.bind();
+  }
+
+  bind() {
+    if (!this.swUpdate.isEnabled) {
+      return;
+    }
+
+    // check every 10 minutes for update
+    interval(1000 * 60 * 10).subscribe(() =>
+      this.swUpdate
+        .checkForUpdate()
+        .then(() => console.log('checking for updates...'))
+    );
+    this.swUpdate.available.subscribe(event => {
+      console.log('current version is', event.current);
+      console.log('available version is', event.available);
+      this.swUpdate.activateUpdate().then(() => {
+        document.location.reload();
+        console.log('The app is updating right now');
+      });
+    });
+    this.swUpdate.activated.subscribe(event => {
+      console.log('old version was', event.previous);
+      console.log('new version is', event.current);
+    });
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      console.log('PWA Application');
+      // this.identityService.install();
+    }
+    window.addEventListener('appinstalled', evt => {
+      console.log('PWA Application installed');
+      // this.identityService.install();
+    });
   }
 
   async load() {
-    const lang = this.cultureService.lang;
-    const promise1 = this.refresh();
-    const promise2 = this.translateService.load(lang);
-    const promise3 = this.enumsService.load();
-    return Promise.all([promise1, promise2, promise3]);
+    await this.refresh();
+    const loader = document.getElementById('app-loading-container');
+    if (loader) { document.body.removeChild(loader); }
   }
 
   async refresh() {
-    if (!this.identityService.identity.token) {
-      return Promise.resolve();
-    }
 
-    const promise1 = this.identityService.load();
+    const promise1 = this.identityService.identity.token ?
+      this.identityService.load() :
+      Promise.resolve();
 
-    promise1.then(op => {
-      if (op.status === OperationResultStatus.NotFound) {
-        this.identityService.logout();
-        window.location.reload();
-        return;
-      }
-    });
-
-    return Promise.all([promise1]).then(() => {
+    const promise2 = this.translateService.load(this.cultureService.lang);
+    const promise3 = this.enumsService.load();
+    return Promise.all([promise1, promise2, promise3]).then(() => {
       this.profileLoaded = true;
       return Promise.resolve();
     });

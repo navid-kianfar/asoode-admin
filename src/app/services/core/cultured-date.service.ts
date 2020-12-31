@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { CultureService } from './culture.service';
+import { IdentityService } from '../auth/identity.service';
 import * as jalaliMoment from 'jalali-moment';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class CulturedDateService {
-  constructor(readonly cultureService: CultureService) {}
+  constructor(
+    readonly cultureService: CultureService,
+    private readonly identityService: IdentityService
+  ) {}
 
   toString(value: string | Date, time?: boolean, format?: string) {
     if (!value) {

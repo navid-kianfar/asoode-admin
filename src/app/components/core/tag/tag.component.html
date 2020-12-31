@@ -1,1 +1,51 @@
-<p>tag works!</p>
+<div class="af-tags af-component" [matMenuTriggerFor]="menu">
+  <label *ngIf="!model || !model.length">{{ placeHolder | translate }}</label>
+  <mat-chip-list #chipList [disabled]="waiting || disabled">
+    <ng-container *ngFor="let chip of items">
+      <mat-chip
+        (removed)="itemRemoved($event)"
+        *ngIf="model.indexOf(chip.value) !== -1"
+        [selectable]="true"
+        [removable]="true"
+        [value]="chip.value"
+      >
+        {{ chip.text | translate: true }}
+        <i class="ikon-cross2" matChipRemove></i>
+      </mat-chip>
+    </ng-container>
+  </mat-chip-list>
+  <mat-menu #menu="matMenu">
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+      <!-- This is the tree node template for leaf nodes -->
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+        <!-- use a disabled button to provide padding for tree leaf -->
+        <button mat-icon-button disabled></button>
+        <span class="node-lbl" (click)="pickNode(node)">{{ node.name }}</span
+        >&nbsp;
+      </mat-tree-node>
+      <!-- This is the tree node template for expandable nodes -->
+      <mat-tree-node
+        *matTreeNodeDef="let node; when: hasChild"
+        matTreeNodePadding
+      >
+        <button
+          mat-icon-button
+          matTreeNodeToggle
+          [attr.aria-label]="'toggle ' + node.name"
+        >
+          <i
+            class="{{
+              treeControl.isExpanded(node)
+                ? 'ikon-arrow-down'
+                : !ltr
+                ? 'ikon-arrow-right'
+                : 'ikon-arrow-left'
+            }}"
+          ></i>
+        </button>
+        <span class="node-lbl" (click)="pickNode(node)">{{ node.name }}</span
+        >&nbsp;
+      </mat-tree-node>
+    </mat-tree>
+  </mat-menu>
+</div>

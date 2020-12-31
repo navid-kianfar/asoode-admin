@@ -3,12 +3,12 @@ import { EnumsService } from '../../services/core/enums.service';
 import { TranslateService } from '../../services/core/translate.service';
 
 @Pipe({
-  name: 'enum',
+  name: 'enum'
 })
 export class EnumPipe implements PipeTransform {
   constructor(
     private readonly enumsService: EnumsService,
-    private readonly translateService: TranslateService,
+    private readonly translateService: TranslateService
   ) {}
 
   transform(value: any, name: string): string {

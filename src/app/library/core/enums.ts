@@ -9,7 +9,17 @@ export enum OperationResultStatus {
   Failed = 8,
   Captcha = 9,
   OverCapacity = 10,
-  Expire = 11,
+  Expire = 11
+}
+export enum FileType {
+  Any = 1,
+  Image = 2,
+  Audio = 3,
+  Video = 4,
+  Excel = 5,
+  Word = 6,
+  Pdf = 7,
+  Specific = 8
 }
 export enum WeekDay {
   Sunday = 0,
@@ -18,7 +28,7 @@ export enum WeekDay {
   Wednesday = 3,
   Thursday = 4,
   Friday = 5,
-  Saturday = 6,
+  Saturday = 6
 }
 export enum FormElementType {
   Button = 0,
@@ -42,29 +52,19 @@ export enum FormElementType {
   Label = 18,
   Number = 19,
   TimePicker = 20,
-}
-export enum FileType {
-  Any = 1,
-  Image = 2,
-  Audio = 3,
-  Video = 4,
-  Excel = 5,
-  Word = 6,
-  Pdf = 7,
-  Specific = 8,
+  DropTree = 21
 }
 export enum DropdownKnownList {
   Countries = 1,
-  Zones = 2,
+  Zones = 2
 }
 export enum CalendarType {
   Default = 0,
   Persian = 1,
   Gregorian = 2,
-  Hijri = 3,
+  Hijri = 3
 }
 export enum UserType {
-  Admin = 1,
   User = 2,
   Marketer = 3,
   Anonymous = 10,

@@ -1,30 +1,31 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from './pages/reports/dashboard/dashboard.component';
-import { LoginComponent } from './pages/auth/login/login.component';
+
+import { RouterModule, Routes } from '@angular/router';
+import {DashboardComponent} from './pages/dashboard/dashboard.component';
+import {LoginComponent} from './pages/auth/login/login.component';
+import {AuthGuard} from './guards/auth.guard';
 import { AnonymousGuard } from './guards/anonymous.guard';
-import { AuthGuard } from './guards/auth.guard';
 import { BlogComponent } from './pages/blog/blog.component';
 import { CmsComponent } from './pages/cms/cms.component';
 import { PlansComponent } from './pages/plans/plans.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
 import { UsersComponent } from './pages/users/users.component';
-import { PostsComponent } from './pages/posts/posts.component';
+import { ContactUsComponent } from './pages/contact-us/contact-us.component';
+import { DiscountsComponent } from './pages/discounts/discounts.component';
 import { ErrorsComponent } from './pages/errors/errors.component';
 import { MarketersComponent } from './pages/marketers/marketers.component';
-import { DiscountsComponent } from './pages/discounts/discounts.component';
-import { ContactUsComponent } from './pages/contact-us/contact-us.component';
+import { PostsComponent } from './pages/posts/posts.component';
 
 const routes: Routes = [
   {
-    path: 'login',
-    component: LoginComponent,
-    canActivate: [AnonymousGuard],
-  },
-  {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [AnonymousGuard]
   },
   {
     path: 'blog',
@@ -76,11 +77,11 @@ const routes: Routes = [
     component: PostsComponent,
     canActivate: [AuthGuard],
   },
-  { path: '**', redirectTo: 'dashboard' },
+  { path: '**', redirectTo: 'dashboard' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

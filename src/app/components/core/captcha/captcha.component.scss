@@ -1,9 +1,8 @@
 .af-captcha {
-  width: 220px;
   height: 40px;
-  border: 1px solid #dedede;
-  border-radius: 5px;
-  background-color: #fff;
+  border: none;
+  border-radius: 30px;
+  background-color: #efefef;
   display: flex;
   justify-content: space-between;
   cursor: pointer;
@@ -12,15 +11,18 @@
     width: 75px;
     outline: none;
     text-align: center;
-    padding: 0 6px;
     font-size: 1em;
     box-shadow: none;
-    background-color: transparent;
+    background-color: #ffffff;
     border: none;
+    font-weight: 500;
+    border-radius: 30px;
+    padding: 0 !important;
+    margin: 6px;
   }
 
   &.focus {
-    border: 1px solid #80bdff;
+    //border: 1px solid #80bdff;
   }
 
   .loader {
@@ -30,10 +32,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    i {
+    span {
       font-size: 1.5rem;
       font-weight: 300;
       vertical-align: middle;
+      color: #ffffff;
     }
   }
   img {
@@ -57,17 +60,6 @@
       font-size: 1.2rem;
       font-weight: 300;
       vertical-align: middle;
-    }
-  }
-}
-:host-context(.dark-theme) .af-captcha,
-.af-captcha.dark-theme {
-  input {
-    color: #ccc;
-  }
-  button {
-    i {
-      color: #ccc;
     }
   }
 }

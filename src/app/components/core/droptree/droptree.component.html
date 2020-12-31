@@ -1,0 +1,52 @@
+<div class="af-droptree af-component droptree {{ cssClass }}">
+  <button
+    [matMenuTriggerFor]="menu"
+    [disabled]="disabled || waiting"
+    [class.focus]="showPlate"
+    class="btn btn-default dropdown-toggle"
+    type="button"
+  >
+    <span *ngIf="prependIcon" class="prepend-icon">
+      <i class="{{ prependIcon }}"></i>
+    </span>
+    <span class="txt" [class.ltr]="ltr && model !== undefined">{{
+      text | translate: true
+    }}</span>
+    <span class="arrow ikon-arrow-down"></span>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+      <!-- This is the tree node template for leaf nodes -->
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+        <!-- use a disabled button to provide padding for tree leaf -->
+        <button mat-icon-button disabled></button>
+        <span class="node-lbl" (click)="pickNode(node)">{{ node.name }}</span
+        >&nbsp;
+      </mat-tree-node>
+      <!-- This is the tree node template for expandable nodes -->
+      <mat-tree-node
+        *matTreeNodeDef="let node; when: hasChild"
+        matTreeNodePadding
+      >
+        <button
+          mat-icon-button
+          matTreeNodeToggle
+          [attr.aria-label]="'toggle ' + node.name"
+        >
+          <i
+            class="{{
+              treeControl.isExpanded(node)
+                ? 'ikon-arrow-down'
+                : !ltr
+                ? 'ikon-arrow-right'
+                : 'ikon-arrow-left'
+            }}"
+          ></i>
+        </button>
+        <span class="node-lbl" (click)="pickNode(node)">{{ node.name }}</span
+        >&nbsp;
+      </mat-tree-node>
+    </mat-tree>
+  </mat-menu>
+</div>

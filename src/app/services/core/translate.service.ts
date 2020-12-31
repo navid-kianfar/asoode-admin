@@ -3,14 +3,14 @@ import { CultureService } from './culture.service';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class TranslateService {
   private readonly repository: any = null;
 
   constructor(
     readonly cultureService: CultureService,
-    readonly client: HttpClient,
+    readonly client: HttpClient
   ) {
     this.repository = {};
     this.repository[this.cultureService.lang] = {};
@@ -27,7 +27,7 @@ export class TranslateService {
         (err: Error) => {
           this.repository[culture] = {};
           reject(err);
-        },
+        }
       );
     });
   }
@@ -35,7 +35,7 @@ export class TranslateService {
   public fromKey(
     value: string,
     skipLog: boolean = false,
-    fallback: string = '',
+    fallback: string = ''
   ): string {
     value = value || '';
     let result = this.repository[this.cultureService.lang][value];
@@ -43,7 +43,7 @@ export class TranslateService {
       result = this.repository[this.cultureService.lang][fallback];
     }
     if ((result === null || result === undefined) && !skipLog) {
-      console.log('Translate not found : ', value);
+      // console.log('Translate not found : ', value);
     }
     return result || fallback || value;
   }

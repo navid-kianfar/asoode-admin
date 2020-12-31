@@ -1,26 +1,31 @@
-<div class="app-header" *ngIf="identityService.identity.token">
-  <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <button (click)="sidenav.toggle()" mat-icon-button>
-        <i class="icon-menu3"></i>
-      </button>
-      <h1>
-        <a routerLink="/dashboard">
-          ASOODE
-        </a>
-      </h1>
-      <span class="menu-spacer"></span>
-      <div>
-        <a mat-button routerLinkActive="selected" routerLink="/users">
-          {{ 'USERS' | translate }}
-        </a>
-        <a mat-button routerLinkActive="selected" routerLink="/transactions">
-          {{ 'TRANSACTIONS' | translate }}
-        </a>
-        <a mat-button routerLinkActive="selected" routerLink="/errors">
-          {{ 'ERRORS' | translate }}
-        </a>
+<div class="main-header">
+  <div class="logo">
+    <img src="/assets/images/logo-colored.png" alt="">
+  </div>
+  <div (click)="toggleAside()" class="menu-toggle">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div class="d-flex align-items-center">
+  </div>
+  <div style="margin: auto"></div>
+  <div class="header-part-right">
+    <!-- Full screen toggle -->
+    <i class="i-Full-Screen header-icon d-none d-sm-inline-block" (click)="toggleFullScreen()"></i>
+
+    <div class="dropdown">
+      <div class="user col align-self-end">
+        <img [matMenuTriggerFor]="menuAccount" src="/assets/images/theme/faces/1.jpg">
+        <mat-menu #menuAccount>
+          <div class="dropdown-header">
+            <i class="i-Lock-User mr-1"></i>
+            {{ identityService.profile.fullName }}
+          </div>
+          <a class="dropdown-item" (click)="logout()"
+             href="javascript:void(0)">{{ 'PNL_LOGOUT' | translate}}</a>
+        </mat-menu>
       </div>
-    </mat-toolbar-row>
-  </mat-toolbar>
+    </div>
+  </div>
 </div>

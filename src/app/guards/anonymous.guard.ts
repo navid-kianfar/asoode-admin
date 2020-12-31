@@ -4,17 +4,17 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   UrlTree,
-  Router,
+  Router
 } from '@angular/router';
 import { IdentityService } from '../services/auth/identity.service';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AnonymousGuard implements CanActivate {
   constructor(
     private readonly identityService: IdentityService,
-    private readonly router: Router,
+    private readonly router: Router
   ) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {

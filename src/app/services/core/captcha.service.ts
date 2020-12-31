@@ -5,7 +5,7 @@ import { CaptchaResult } from '../../view-models/core/captcha-types';
 import { OperationResult } from '../../library/core/operation-result';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class CaptchaService {
   subject = new Subject<any>();

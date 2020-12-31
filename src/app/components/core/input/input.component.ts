@@ -3,13 +3,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  styleUrls: ['./input.component.scss']
 })
 export class InputComponent implements OnInit {
   @Input() disabled: boolean;
   @Input() cssClass: string;
   @Input() readonly: boolean;
   @Input() numeric: boolean;
+  @Input() persian: boolean;
   @Input() password: boolean;
   @Input() textArea: boolean;
   @Input() growable?: boolean;
@@ -20,6 +21,7 @@ export class InputComponent implements OnInit {
   @Input() autofocus?: boolean;
   @Input() placeHolder?: string;
   @Input() rows?: number;
+  @Input() maxLength?: number;
   @Input() model: string;
 
   @Output() modelChange = new EventEmitter<string>();
@@ -33,6 +35,8 @@ export class InputComponent implements OnInit {
 
   ngOnInit() {
     this.focusState = 'no-focus';
+    this.numeric = this.numeric || false;
+    this.persian = this.persian || false;
     this.ltr = this.ltr || this.numeric;
   }
 

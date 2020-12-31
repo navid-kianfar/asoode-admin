@@ -7,9 +7,7 @@ import { HttpService } from '../core/http.service';
 import { OperationResult } from '../../library/core/operation-result';
 import { OperationResultStatus } from '../../library/core/enums';
 import {
-  ForgotResultViewModel,
   LoginResultViewModel,
-  RegisterResultViewModel,
 } from '../../view-models/auth/identity-view-models';
 import { CookieService } from 'ngx-cookie-service';
 

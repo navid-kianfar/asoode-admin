@@ -3,17 +3,17 @@ import {
   CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
-  Router,
+  Router
 } from '@angular/router';
 import { IdentityService } from '../services/auth/identity.service';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
   constructor(
     private readonly identityService: IdentityService,
-    private readonly router: Router,
+    private readonly router: Router
   ) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
     if (hasAccess) {
       return true;
     }
-    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+    this.router.navigate(['/login']);
     return false;
   }
 }

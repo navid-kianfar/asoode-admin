@@ -1,6 +1,11 @@
+const domain = 'ciblsoft.com';
+
 export const environment = {
+  lang: 'fa',
   production: true,
-  api_endpoint: 'https://api.ciblsoft.com/v2',
-  googleOauth: 'https://api.ciblsoft.com/oauth/google-login/admin',
+  direct_endpoint: `https://${domain}`,
+  api_endpoint: `https://api.${domain}/v2`,
+  socket_endpoint: `https://socket.${domain}`,
+  googleOauth: `https://api.${domain}/oauth/google-login/admin`,
   ga: 'G-Y3H4HMTWZG',
 };

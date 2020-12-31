@@ -6,13 +6,13 @@ import {
   OnInit,
   Output,
   SimpleChanges,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 
 @Component({
   selector: 'app-number',
   templateUrl: './number.component.html',
-  styleUrls: ['./number.component.scss'],
+  styleUrls: ['./number.component.scss']
 })
 export class NumberComponent implements OnInit, OnChanges {
   @Input() placeHolder: string;
@@ -27,6 +27,7 @@ export class NumberComponent implements OnInit, OnChanges {
   @Input() prependIcon: string;
   @Input() model: number;
   @Output() modelChange = new EventEmitter<number>();
+  @Output() changed = new EventEmitter<number>();
   @Output() blur = new EventEmitter<any>();
   @Output() focus = new EventEmitter<any>();
   @ViewChild('numberInput', { static: false }) numberInput;
@@ -38,6 +39,7 @@ export class NumberComponent implements OnInit, OnChanges {
       if (value !== changes.model.currentValue) {
         this.model = value;
         this.modelChange.emit(value);
+        this.changed.emit(value);
       }
     }
   }
@@ -50,6 +52,7 @@ export class NumberComponent implements OnInit, OnChanges {
     }
     this.model = this.validateValue((this.model || 0) + 1);
     this.modelChange.emit(this.model);
+    this.changed.emit(this.model);
   }
   decrease() {
     if (this.disabled || this.readonly) {
@@ -57,6 +60,7 @@ export class NumberComponent implements OnInit, OnChanges {
     }
     this.model = this.validateValue((this.model || 0) - 1);
     this.modelChange.emit(this.model);
+    this.changed.emit(this.model);
   }
   validateValue(model: number): number {
     model = +model || (+model === 0 ? 0 : undefined);
@@ -75,6 +79,7 @@ export class NumberComponent implements OnInit, OnChanges {
     }
     this.model = validated;
     this.modelChange.emit(validated);
+    this.changed.emit(validated);
   }
   onKeyDown($event: KeyboardEvent) {
     if ($event.key === 'ArrowUp') {

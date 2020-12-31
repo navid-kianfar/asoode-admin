@@ -1,11 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { CaptchaService } from '../../../services/core/captcha.service';
 import { Subscription } from 'rxjs';
 import { CaptchaObject } from '../../../view-models/core/captcha-types';
@@ -14,13 +7,14 @@ import { OperationResultStatus } from '../../../library/core/enums';
 @Component({
   selector: 'app-captcha',
   templateUrl: './captcha.component.html',
-  styleUrls: ['./captcha.component.scss'],
+  styleUrls: ['./captcha.component.scss']
 })
 export class CaptchaComponent implements OnInit, OnDestroy {
   @Output() modelChange = new EventEmitter<CaptchaObject>();
   @Input() model: CaptchaObject;
   @Input() disabled: boolean;
   @Input() cssClass: string;
+  @Input() placeHolder: string;
 
   image: string;
   waiting: boolean;
@@ -33,7 +27,7 @@ export class CaptchaComponent implements OnInit, OnDestroy {
     this.model = this.model || {
       code: '',
       token: '',
-      expire: '',
+      expire: ''
     };
     this.modelChange.emit(this.model);
     if (this.disabled === undefined) {

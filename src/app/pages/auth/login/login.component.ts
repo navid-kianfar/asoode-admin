@@ -1,49 +1,43 @@
 import { Component, OnInit } from '@angular/core';
-import { FormViewModel } from '../../../components/core/form/contracts';
-import { FormService } from '../../../services/core/form.service';
-import { IdentityService } from '../../../services/auth/identity.service';
-import { OperationResultStatus } from '../../../library/core/enums';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AppInitializerProvider } from '../../../services/general/app.initializer';
-import { environment } from '../../../../environments/environment';
+import {FormViewModel} from '../../../components/core/form/contracts';
+import {FormService} from '../../../services/core/form.service';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IdentityService } from '../../../services/auth/identity.service';
 import { TranslateService } from '../../../services/core/translate.service';
+import { environment } from '../../../../environments/environment';
+import { OperationResultStatus } from '../../../library/core/enums';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  form: FormViewModel[];
   waiting: boolean;
-  mode: ViewMode;
-  username: string;
+  form: FormViewModel[];
   googleOauth: string;
+  mode: ViewMode;
 
-  ViewMode = ViewMode;
-  verificationCode: string;
   constructor(
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly initializerProvider: AppInitializerProvider,
     private readonly formService: FormService,
     private readonly identityService: IdentityService,
     private readonly translateService: TranslateService,
     private readonly gaService: GoogleAnalyticsService,
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.googleOauth = environment.googleOauth;
     this.mode = ViewMode.Login;
-    this.username = '';
+    this.googleOauth = environment.googleOauth;
 
     const oauth = (this.activatedRoute.snapshot.queryParams as any).access;
     if (oauth) {
       const access = JSON.parse(atob(oauth));
       this.identityService.setIdentityInfo(access);
       this.mode = ViewMode.OAuth;
-      this.initializerProvider.refresh().then(() => {
+      this.identityService.load().then(() => {
         this.router.navigateByUrl('/dashboard');
       });
     }
@@ -94,9 +88,8 @@ export class LoginComponent implements OnInit {
     this.waiting = true;
     const op = await this.identityService.login(model);
     if (op.status === OperationResultStatus.Success) {
-      this.verificationCode = op.data.id;
       if (op.data.token) {
-        await this.initializerProvider.refresh();
+        await this.identityService.load();
         await this.router.navigateByUrl('/dashboard');
         return;
       }
@@ -113,25 +106,14 @@ export class LoginComponent implements OnInit {
         ]);
         return;
       }
-      if (op.data.emailNotConfirmed) {
-        this.username = model.username;
-        this.mode = ViewMode.Confirm;
-        return;
-      }
-      if (op.data.phoneNotConfirmed) {
-        this.username = model.username;
-        this.mode = ViewMode.Confirm;
-      }
       return;
     }
 
     this.waiting = false;
   }
-
-  confirmPhone() {}
 }
+
 export enum ViewMode {
   Login = 1,
-  Confirm = 2,
   OAuth = 3,
 }

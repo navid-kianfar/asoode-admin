@@ -15,13 +15,8 @@ import { HttpService } from '../../../services/core/http.service';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { GridCommand } from '../../../view-models/core/grid-types';
 import { MaterialTranslatorService } from '../../../services/core/material-translator.service';
-import {
-  MatColumnDef,
-  MatPaginator,
-  MatTable,
-  MatTableDataSource,
-} from '@angular/material';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatColumnDef, MatTable, MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-grid',

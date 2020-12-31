@@ -19,8 +19,9 @@ export class NumberHelpers {
     const mm = this.pad(parsed.minute, 2);
     return `${dd}:${hh}:${mm}`;
   }
-  static humanFileSize(source: number, si): string {
-    const thresh = si ? 1000 : 1024;
+  static humanFileSize(source: number): string {
+    const si = true;
+    const thresh = 1024;
     if (Math.abs(source) < thresh) {
       return source + ' B';
     }
@@ -32,7 +33,7 @@ export class NumberHelpers {
       source /= thresh;
       u += 1;
     } while (Math.abs(source) >= thresh && u < units.length - 1);
-    return source.toFixed(1) + ' ' + units[u];
+    return Math.round(source) + ' ' + units[u];
   }
   static ticksToDurationString(model: number): string {
     const parsed = NumberHelpers.ticksToTimeSpan(model);
@@ -43,7 +44,7 @@ export class NumberHelpers {
     return {
       day: Math.floor(model / dayTicks),
       hour: Math.floor((model / hourTicks) % 24),
-      minute: Math.round((model / minuteTicks) % 60),
+      minute: Math.round((model / minuteTicks) % 60)
     };
   }
   static durationToTicks(duration: TimeViewModel): number {
@@ -60,7 +61,7 @@ export class NumberHelpers {
     return {
       day: Math.floor(total / 8),
       hour: total % 8,
-      minute: duration.minute,
+      minute: duration.minute
     };
   }
   static timespanToTicks(model: TimeViewModel): number {
@@ -68,7 +69,22 @@ export class NumberHelpers {
     return this.durationToTicks({
       day: 0,
       hour: total,
-      minute: model.minute,
+      minute: model.minute
     });
+  }
+
+  static clearNumbers(input: any): string {
+    // @ts-ignore
+    return input
+      .replace(/[\u0660-\u0669]/g, c => {
+        return c.charCodeAt(0) - 0x0660;
+      }) // @ts-ignore
+      .replace(/[\u06f0-\u06f9]/g, c => {
+        return c.charCodeAt(0) - 0x06f0;
+      });
+  }
+
+  static format(value: number): string {
+    return new Intl.NumberFormat('en-US', { maximumSignificantDigits: 3 }).format(value);
   }
 }

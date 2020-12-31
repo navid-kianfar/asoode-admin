@@ -1,29 +1,29 @@
 import { Injectable } from '@angular/core';
-import { MatPaginator } from '@angular/material';
 import { TranslateService } from './translate.service';
 import { StringHelpers } from '../../helpers/string.helpers';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class MaterialTranslatorService {
   constructor(private readonly translateService: TranslateService) {}
 
   paginator(paginator: MatPaginator) {
     paginator._intl.firstPageLabel = this.translateService.fromKey(
-      'PAGINATOR_FIRST',
+      'PAGINATOR_FIRST'
     );
     paginator._intl.itemsPerPageLabel = this.translateService.fromKey(
-      'PAGINATOR_PER_PAGE',
+      'PAGINATOR_PER_PAGE'
     );
     paginator._intl.lastPageLabel = this.translateService.fromKey(
-      'PAGINATOR_LAST',
+      'PAGINATOR_LAST'
     );
     paginator._intl.nextPageLabel = this.translateService.fromKey(
-      'PAGINATOR_NEXT',
+      'PAGINATOR_NEXT'
     );
     paginator._intl.previousPageLabel = this.translateService.fromKey(
-      'PAGINATOR_PREV',
+      'PAGINATOR_PREV'
     );
     paginator._intl.getRangeLabel = (page, pageSize, length) => {
       let from = 0;
@@ -37,7 +37,7 @@ export class MaterialTranslatorService {
       }
       return StringHelpers.format(
         this.translateService.fromKey('PAGINATOR_OF'),
-        [from, to, length],
+        [from, to, length]
       );
     };
   }

@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormViewModel } from '../../components/core/form/contracts';
-import { CostUnit, PlanType } from '../../library/app/enums';
 import { ModalService } from '../../services/core/modal.service';
 import { FormService } from '../../services/core/form.service';
 import { PromptComponent } from '../../modals/prompt/prompt.component';
@@ -11,6 +10,7 @@ import { GridCommand } from '../../view-models/core/grid-types';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { TranslateService } from '../../services/core/translate.service';
 import { IdentityService } from '../../services/auth/identity.service';
+import { CostUnit, PlanType } from '../../library/app/enums';
 
 @Component({
   selector: 'app-users',
@@ -41,6 +41,7 @@ export class UsersComponent implements OnInit {
   }
 
   private createForm(plan): FormViewModel[] {
+
     return [
       {
         size: 6,
@@ -266,6 +267,7 @@ export class UsersComponent implements OnInit {
   }
 
   plan(element: any) {
+
     const form = this.createForm(element.plan);
     this.formService.setModel(form, element.plan);
     this.modalService

@@ -1,20 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ConfigService } from './config.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class EnumsService {
   repository: any = {};
-  constructor(
-    private readonly client: HttpClient,
-    private readonly config: ConfigService,
-  ) {}
+  constructor(private readonly client: HttpClient) {}
 
   async load(): Promise<void> {
     return new Promise((resolve, reject) => {
-      const path = `${this.config.backend}/enums`;
+      const path = `${environment.api_endpoint}/enums`;
       this.client.get(path).subscribe(
         (response: string) => {
           this.repository = response;
@@ -23,7 +20,7 @@ export class EnumsService {
         (err: Error) => {
           this.repository = {};
           reject(err);
-        },
+        }
       );
     });
   }

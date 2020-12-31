@@ -1,4 +1,16 @@
 {
+  "PNL_DASHBOARD": "داشبورد",
+  "PNL_LOGOUT": "خروج",
+  "PNL_LOGIN": "ورود",
+  "PNL_FORGOT": "کلمه عبور خود را فراموش کردید؟",
+  "PNL_LOGIN_GOOGLE": "ورود با حساب گوگل",
+  "USERNAME": "نام کاربری",
+  "USERNAME_REQUIRED": "لطفا نام کاربری خود را وارد کنید.",
+  "CAPTCHA": "عبارت امنیتی",
+  "CAPTCHA_LENGTH": "عبارت امنیتی صحیح نیست.",
+  "CAPTCHA_REQUIRED": "لطفا عبارت امنیتی را وارد کنید.",
+
+
   "USERS": "کاربران",
   "TRANSACTIONS": "تراکنش\u200Cهای مالی",
   "PLANS": "پلان ها",
@@ -79,5 +91,7 @@
   "DASHBOARD": "داشبورد",
   "CONTACT_US": "تماس با ما",
   "REPLY_MESSAGE": "متن پاسخ",
-  "SUBMIT": "ارسال"
+  "SUBMIT": "ارسال",
+  "ARE_YOU_SURE_TITLE": "آیا از انجام این کار اطمینان دارید؟",
+  "ARE_YOU_SURE_DESCRIPTION": "در صورت تایید عملیات غیر قابل بازگشت است"
 }

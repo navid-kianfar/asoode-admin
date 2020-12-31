@@ -14,10 +14,8 @@ import {
 } from '../../../library/core/enums';
 import { HttpService } from '../../../services/core/http.service';
 import { ListViewModel } from '../../../view-models/core/list-types';
-import { CountryService } from '../../../services/core/country.service';
-import { TimezoneService } from '../../../services/core/timezone.service';
-import { MatMenuTrigger } from '@angular/material';
 import { EnumsService } from '../../../services/core/enums.service';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'app-dropdown',
@@ -51,8 +49,6 @@ export class DropdownComponent implements OnInit, OnChanges {
   selectedItem: any;
   constructor(
     private readonly httpService: HttpService,
-    private readonly countryService: CountryService,
-    private readonly zoneService: TimezoneService,
     private readonly enumsService: EnumsService,
   ) {}
 
@@ -91,30 +87,6 @@ export class DropdownComponent implements OnInit, OnChanges {
       this.items.unshift(def);
       if (this.model === undefined) {
         this.onPick(def, null);
-      }
-    }
-    if (this.knownList) {
-      switch (this.knownList) {
-        case DropdownKnownList.Countries:
-          this.countryService.countries
-            .map<ListViewModel>(c => {
-              return {
-                value: c.id,
-                text: c.text,
-              };
-            })
-            .forEach(c => this.items.push(c));
-          break;
-        case DropdownKnownList.Zones:
-          this.zoneService.timezones
-            .map<ListViewModel>(t => {
-              return {
-                value: t.value,
-                text: t.text,
-              };
-            })
-            .forEach(t => this.items.push(t));
-          break;
       }
     }
     if (this.enum) {

@@ -5,7 +5,7 @@
     [disabled]="disabled || uploading"
     class="btn btn-file"
   >
-    {{ inputText || browse || 'BROWSE' | translate: true }}
+    {{ inputText || browse || "BROWSE" | translate: true }}
   </button>
   <div class="summary-container" *ngIf="summary">{{ summary }}</div>
   <input

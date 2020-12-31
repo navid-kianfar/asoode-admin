@@ -2,6 +2,7 @@ export interface LoginResultViewModel {
   emailNotConfirmed: boolean;
   invalidPassword: boolean;
   lockedOut: boolean;
+  lockedUntil?: Date;
   notFound: boolean;
   phoneNotConfirmed: boolean;
   smsFailed: boolean;
@@ -10,22 +11,15 @@ export interface LoginResultViewModel {
   username: string;
   id: string;
 }
-export interface RegisterResultViewModel {
-  duplicate: boolean;
-  emailFailed: boolean;
-  emailNotConfirmed: boolean;
-  phoneNotConfirmed: boolean;
-  smsFailed: boolean;
+export interface MemberInfoViewModel {
+  email: string;
+  avatar: string;
+  firstName: string;
+  fullName: string;
   id: string;
+  lastName: string;
+  username: string;
 }
+export interface ProfileViewModel extends MemberInfoViewModel {
 
-export interface ForgotResultViewModel {
-  emailFailed: boolean;
-  emailNotConfirmed: boolean;
-  phoneNotConfirmed: boolean;
-  smsFailed: boolean;
-  lockedOut: boolean;
-  notFound: boolean;
-  wait: boolean;
-  id: string;
 }

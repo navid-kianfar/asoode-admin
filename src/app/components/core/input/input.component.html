@@ -6,6 +6,7 @@
   }}"
 >
   <label *ngIf="label">{{ label | translate: true }}</label>
+
   <ng-container *ngIf="!textArea">
     <div
       class="input-container {{ prependIcon ? 'prepend-icon' : '' }} {{
@@ -14,7 +15,9 @@
     >
       <i *ngIf="prependIcon" [class]="prependIcon"></i>
       <input
+        [maxlength]="maxLength"
         [appOnlyNumber]="numeric"
+        [appOnlyPersian]="persian"
         [autofocus]="autofocus"
         (focus)="onFocus()"
         (blur)="onBlur()"
@@ -34,6 +37,8 @@
   <ng-container *ngIf="textArea">
     <div *ngIf="growable" class="growable-content">{{ model }}</div>
     <textarea
+      [appOnlyPersian]="persian"
+      [maxlength]="maxLength"
       [autofocus]="autofocus"
       (keydown.enter)="onEnter()"
       (focus)="onFocus()"

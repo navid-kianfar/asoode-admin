@@ -1,29 +1,81 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Input,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
-import { IdentityService } from '../../../services/auth/identity.service';
-import { ModalService } from '../../../services/core/modal.service';
-import { OperationResultStatus } from '../../../library/core/enums';
-import { HttpService } from '../../../services/core/http.service';
-import { OperationResult } from '../../../library/core/operation-result';
+import {Component, Inject, Input, OnInit} from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import {IdentityService} from '../../../services/auth/identity.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  @Input() sidenav: any;
-  loading: boolean;
+
+  fullScreen: boolean;
+  open: boolean;
+
   constructor(
-    public readonly identityService: IdentityService,
-    private readonly modalService: ModalService,
-    private readonly httpService: HttpService,
-  ) {}
-  ngOnInit(): void {}
+    readonly identityService: IdentityService,
+    private readonly router: Router,
+  ) { }
+
+  ngOnInit(): void {
+    this.open = true;
+    this.fullScreen = false;
+  }
+
+  openFullScreen(): void {
+    this.fullScreen = true;
+    const elem = document.documentElement as any;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+      elem.msRequestFullscreen();
+    }
+  }
+
+  exitFullScreen(): void {
+    this.fullScreen = false;
+    if (document.fullscreenElement) {
+      let promise;
+      const elem = document as any;
+      if (elem.exitFullscreen) {
+        promise = elem.exitFullscreen();
+      } else if (elem.webkitExitFullscreen) { /* Safari */
+        promise = elem.webkitExitFullscreen();
+      } else if (elem.msExitFullscreen) { /* IE11 */
+        promise = elem.msExitFullscreen();
+      }
+      promise.catch((err) => console.error(err));
+    }
+
+  }
+
+  toggleFullScreen(): void {
+    if (this.fullScreen) {
+      this.exitFullScreen();
+      return;
+    }
+    this.openFullScreen();
+  }
+
+  toggleAside(): void {
+    this.open = !this.open;
+    const sideBar = document.querySelector('.sidebar-left');
+    const mainContent = document.querySelector('.main-content-wrap');
+    if (!sideBar || !mainContent) { return; }
+    if (this.open) {
+      sideBar.classList.add('open');
+      mainContent.classList.add('sidenav-open');
+    } else {
+      sideBar.classList.remove('open');
+      mainContent.classList.remove('sidenav-open');
+    }
+  }
+
+  logout(): void {
+    this.identityService.logout();
+    this.router.navigateByUrl('/login');
+  }
 }

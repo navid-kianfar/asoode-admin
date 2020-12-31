@@ -1,100 +1,116 @@
-<div class="users-container">
-  <div class="box">
-    <app-grid
-      [commander]="commander"
-      filter="true"
-      backend="/admin/user/list"
-      [columns]="['index', 'fullName', 'createdAt', 'phone', 'email', 'action']"
-    >
-      <!-- Index Column -->
-      <ng-container matColumnDef="index">
-        <th style="width: 70px" mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.index }}
-        </td>
-      </ng-container>
+<div class="app-admin-wrap layout-sidebar-large">
+  <app-header></app-header>
+  <app-sidebar></app-sidebar>
+  <div class="main-content-wrap sidenav-open d-flex flex-column">
+    <div class="main-content">
+      <div class="breadcrumb">
+        <h1>{{ 'USERS' | translate }}</h1>
+      </div>
+      <div class="separator-breadcrumb border-top"></div>
 
-      <!-- Created at Column -->
-      <ng-container matColumnDef="createdAt">
-        <th style="width: 170px" mat-header-cell *matHeaderCellDef class="ltr">
-          {{ 'CREATED_AT' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let element" class="ltr">
-          {{ element.createdAt | culturedDate: true }}
-        </td>
-      </ng-container>
+      <div class="users-container">
+        <div class="box">
+          <app-grid
+            [commander]="commander"
+            filter="true"
+            backend="/admin/user/list"
+            [columns]="['index', 'fullName', 'createdAt', 'phone', 'email', 'action']"
+          >
+            <!-- Index Column -->
+            <ng-container matColumnDef="index">
+              <th style="width: 70px" mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.index }}
+              </td>
+            </ng-container>
 
-      <!-- Full name Column -->
-      <ng-container matColumnDef="fullName">
-        <th style="width: 250px" mat-header-cell *matHeaderCellDef>
-          {{ 'FULL_NAME' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.fullName }}
-        </td>
-      </ng-container>
+            <!-- Created at Column -->
+            <ng-container matColumnDef="createdAt">
+              <th style="width: 170px" mat-header-cell *matHeaderCellDef class="ltr">
+                {{ 'CREATED_AT' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element" class="ltr">
+                {{ element.createdAt | culturedDate: true }}
+              </td>
+            </ng-container>
 
-      <!-- Phone Column -->
-      <ng-container matColumnDef="phone">
-        <th style="width: 150px" mat-header-cell *matHeaderCellDef class="ltr">
-          {{ 'PHONE' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let element" class="ltr">
-          <ng-container *ngIf="element.phone">
-            <i
-              class="ikon-phone3"
-              [ngStyle]="{ color: element.phoneConfirmed ? 'green' : 'red' }"
-            ></i
-            >&nbsp;
-            {{ element.phone }}
-          </ng-container>
-        </td>
-      </ng-container>
+            <!-- Full name Column -->
+            <ng-container matColumnDef="fullName">
+              <th style="width: 250px" mat-header-cell *matHeaderCellDef>
+                {{ 'FULL_NAME' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.fullName }}
+              </td>
+            </ng-container>
 
-      <!-- Email Column -->
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef class="ltr">
-          {{ 'EMAIL' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let element" class="ltr">
-          <ng-container *ngIf="element.email?.indexOf('@asoode.user') === -1">
-            <i
-              class="ikon-envelop2"
-              [ngStyle]="{ color: element.emailConfirmed ? 'green' : 'red' }"
-            ></i
-            >&nbsp;
-            {{ element.email }}
-          </ng-container>
-        </td>
-      </ng-container>
+            <!-- Phone Column -->
+            <ng-container matColumnDef="phone">
+              <th style="width: 150px" mat-header-cell *matHeaderCellDef class="ltr">
+                {{ 'PHONE' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element" class="ltr">
+                <ng-container *ngIf="element.phone">
+                  <i
+                    class="ikon-phone3"
+                    [ngStyle]="{ color: element.phoneConfirmed ? 'green' : 'red' }"
+                  ></i
+                  >&nbsp;
+                  {{ element.phone }}
+                </ng-container>
+              </td>
+            </ng-container>
 
-      <!-- Action Column -->
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
-        <td class="operations" mat-cell *matCellDef="let element">
-          <button (click)="prepareEdit(element)">
-            <i class="ikon-pen5"></i>
-          </button>
-          <button (click)="prepareReset(element)">
-            <i class="ikon-key3"></i>
-          </button>
-          <button (click)="plan(element)">
-            <i class="ikon-flag2"></i>
-          </button>
-          <!--          <button (click)="import(element)">-->
-          <!--            <i class="ikon-users4"></i>-->
-          <!--          </button>-->
-          <!--          <button (click)="transactions(element)">-->
-          <!--            <i class="ikon-coin-dollar"></i>-->
-          <!--          </button>-->
-          <button (click)="confirm(element)">
-            <i class="ikon-user-check"></i>
-          </button>
-          <button (click)="block(element)">
-            <i class="ikon-user-block"></i>
-          </button>
-        </td>
-      </ng-container>
-    </app-grid>
+            <!-- Email Column -->
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef class="ltr">
+                {{ 'EMAIL' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element" class="ltr">
+                <ng-container *ngIf="element.email?.indexOf('@asoode.user') === -1">
+                  <i
+                    class="ikon-envelop2"
+                    [ngStyle]="{ color: element.emailConfirmed ? 'green' : 'red' }"
+                  ></i
+                  >&nbsp;
+                  {{ element.email }}
+                </ng-container>
+              </td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+              <td class="operations" mat-cell *matCellDef="let element">
+                <button (click)="prepareEdit(element)">
+                  <i class="ikon-pen5"></i>
+                </button>
+                <button (click)="prepareReset(element)">
+                  <i class="ikon-key3"></i>
+                </button>
+                <button (click)="plan(element)">
+                  <i class="ikon-flag2"></i>
+                </button>
+                <!--          <button (click)="import(element)">-->
+                <!--            <i class="ikon-users4"></i>-->
+                <!--          </button>-->
+                <!--          <button (click)="transactions(element)">-->
+                <!--            <i class="ikon-coin-dollar"></i>-->
+                <!--          </button>-->
+                <button (click)="confirm(element)">
+                  <i class="ikon-user-check"></i>
+                </button>
+                <button (click)="block(element)">
+                  <i class="ikon-user-block"></i>
+                </button>
+              </td>
+            </ng-container>
+          </app-grid>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+
+

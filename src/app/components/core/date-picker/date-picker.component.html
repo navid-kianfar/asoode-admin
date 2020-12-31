@@ -3,13 +3,14 @@
     #dateInput
     matInput
     (click)="picker.open()"
-    [max]="to"
-    [min]="from"
+    [max]="max || to"
+    [min]="min || from"
     [matDatepicker]="picker"
     [ngModel]="model"
     (ngModelChange)="model = $event; modelChange.emit($event)"
     (change)="dateChange($event, dateInput, picker)"
-    placeholder="انتخاب تاریخ"
+    [placeholder]="placeholder | translate"
+    [disabled]="disabled"
   />
   <mat-datepicker #picker></mat-datepicker>
 </div>

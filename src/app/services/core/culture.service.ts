@@ -4,7 +4,7 @@ import { WeekDay } from '../../library/core/enums';
 import { ICulture } from '../../view-models/core/date-types';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class CultureService {
   public cultures: StringDictionary<ICulture>;
@@ -28,7 +28,7 @@ export class CultureService {
         'سه شنبه',
         'چهار شنبه',
         'پنج شنبه',
-        'جمعه',
+        'جمعه'
       ],
       dayNamesShort: ['ش', '۱ش', '۲ش', '۳ش', '۴ش', '۵ش', 'ج'],
       monthNames: [
@@ -43,12 +43,12 @@ export class CultureService {
         'آذر',
         'دی',
         'بهمن',
-        'اسفند',
+        'اسفند'
       ],
       daysInMonths: [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29],
       moneySign: '',
       startDay: WeekDay.Saturday,
-      weekMap: { 0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: 7 },
+      weekMap: { 0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: 7 }
     });
     this.cultures.Add('ar', {
       direction: 'rtl',
@@ -62,7 +62,7 @@ export class CultureService {
         'الأربعاء',
         'الخميس',
         'الجمعة',
-        'السبت',
+        'السبت'
       ],
       dayNamesShort: ['أح', 'إث', 'ثل', 'أر', 'خم', 'جم', 'سب'],
       monthNames: [
@@ -77,12 +77,12 @@ export class CultureService {
         'رَمَضان',
         'شَوّال',
         'ذو القعدة',
-        'ذو الحجة',
+        'ذو الحجة'
       ],
       daysInMonths: [30, 29, 30, 29, 30, 29, 30, 29, 30, 29, 30, 29],
       moneySign: '',
       startDay: WeekDay.Monday,
-      weekMap: { 0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: 7 },
+      weekMap: { 0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: 7 }
     });
     this.cultures.Add('en', {
       direction: 'ltr',
@@ -96,7 +96,7 @@ export class CultureService {
         'Wednesday',
         'Thursday',
         'Friday',
-        'Saturday',
+        'Saturday'
       ],
       dayNamesShort: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
       monthNames: [
@@ -111,12 +111,12 @@ export class CultureService {
         'September',
         'October',
         'November',
-        'December',
+        'December'
       ],
       daysInMonths: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
       moneySign: '$',
       startDay: WeekDay.Sunday,
-      weekMap: { 0: 0, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6 },
+      weekMap: { 0: 0, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6 }
     });
 
     if (!this.cultures.ContainsKey(this.currentLanguage)) {

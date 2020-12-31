@@ -1,30 +1,47 @@
-<div class="auth-page">
-  <div class="container-fluid background-column">
-    <div class="row">
-      <div class="col-md-4 col-sm-6 form-column">
-        <div class="auth-form">
-          <div class="logo"></div>
-          <ng-container *ngIf="mode === ViewMode.OAuth">
-            <app-waiting></app-waiting>
-          </ng-container>
-          <ng-container *ngIf="mode === ViewMode.Login">
-            <h2 class="title">{{ 'LOGIN_TO_YOUR_ACCOUNT' | translate }}</h2>
+<div class="auth-layout-wrap" style="background-image: url(/assets/images/theme/photo-wide-4.jpg)">
+  <div class="auth-content">
+    <div class="card o-hidden">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="p-4">
+            <div class="auth-logo text-center mb-4">
+              <img src="/assets/images/logo-colored.png" alt="">
+            </div>
+            <h1 class="mb-3 text-18">{{ 'PNL_LOGIN' | translate }}</h1>
             <app-form
               [elements]="form"
               [actionWaiting]="waiting"
-              (action)="login()"
-              [actionLabel]="'LOGIN'"
+              [standalone]="true"
             ></app-form>
-
-            <hr />
-            <a mat-stroked-button class="google" [href]="googleOauth">
-              <img src="/assets/images/pages/auth/google-logo.svg" alt="" />
-              <span>&nbsp;{{ 'LOGIN_WITH_GOOGLE' | translate }}</span>
+            <button [appWaitingButton]="waiting"
+                    (click)="login()"
+                    class="btn btn-rounded btn-primary btn-block mt-2">
+              {{ 'PNL_LOGIN' | translate }}
+            </button>
+            <div class="mt-3 text-center">
+<!--              <a class="text-muted" routerLink="/forgot">-->
+<!--                <u>{{ 'PNL_FORGOT' | translate }}</u>-->
+<!--              </a>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 text-center" style="background-size: cover;background-image: url(/assets/images/theme/photo-long-3.jpg)">
+          <div class="pr-3 auth-right">
+            <a [href]="googleOauth" class="btn btn-rounded btn-outline-google btn-block btn-icon-text">
+              <i class="i-Google-Plus"></i>
+              {{ 'PNL_LOGIN_GOOGLE' | translate}}
             </a>
-          </ng-container>
+<!--            <a class="btn btn-rounded btn-outline-primary btn-outline-email btn-block btn-icon-text" href="signup.html">-->
+<!--              <i class="i-Mail-with-At-Sign"></i>-->
+<!--              Sign up with Email-->
+<!--            </a>-->
+<!--            <a class="btn btn-rounded btn-block btn-icon-text btn-outline-facebook">-->
+<!--              <i class="i-Facebook-2"></i>-->
+<!--              Sign up with Facebook-->
+<!--            </a>-->
+          </div>
         </div>
       </div>
-      <div class="col-md-8 empty-column"></div>
     </div>
   </div>
 </div>

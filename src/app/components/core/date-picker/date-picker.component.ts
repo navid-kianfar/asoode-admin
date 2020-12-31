@@ -6,7 +6,7 @@ import {
   OnInit,
   Output,
   SimpleChanges,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { ICulture } from '../../../view-models/core/date-types';
 import { CulturedDateService } from '../../../services/core/cultured-date.service';
@@ -14,19 +14,22 @@ import { CulturedDateService } from '../../../services/core/cultured-date.servic
 @Component({
   selector: 'app-date-picker',
   templateUrl: './date-picker.component.html',
-  styleUrls: ['./date-picker.component.scss'],
+  styleUrls: ['./date-picker.component.scss']
 })
 export class DatePickerComponent implements OnInit {
   formattedDate: string;
   dateView: any;
   calendar: ICulture;
 
+  @Input() placeholder: string;
   @Input() cssClass: string;
   @Input() culture: string;
   @Input() disabled: boolean;
   @Input() allowNull: boolean;
   @Input() pickButton: boolean;
   @Input() plateOpen: boolean;
+  @Input() min: Date | string;
+  @Input() max: Date | string;
   @Input() model: Date;
   @Input() from: Date;
   @Input() to: Date;
@@ -77,6 +80,12 @@ export class DatePickerComponent implements OnInit {
     if (this.maxYears) {
       this.from = new Date();
       this.from.setFullYear(this.from.getFullYear() - this.maxYears);
+    }
+    if (this.min && typeof this.min === 'string') {
+      this.min = new Date(this.min);
+    }
+    if (this.max && typeof this.max === 'string') {
+      this.max = new Date(this.max);
     }
   }
 
