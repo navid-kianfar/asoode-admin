@@ -103,6 +103,7 @@ import { ErrorModalComponent } from './modals/error/error-modal.component';
 import { ContactReplyComponent } from './modals/contact-reply/contact-reply.component';
 import { WysiwygEditorComponent } from './components/core/wysiwyg-editor/wysiwyg-editor.component';
 import { CKEditorModule } from 'ngx-ckeditor';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -215,6 +216,7 @@ import { CKEditorModule } from 'ngx-ckeditor';
     NgxGoogleAnalyticsRouterModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     CKEditorModule,
+    NgApexchartsModule,
   ],
   providers: [
     {

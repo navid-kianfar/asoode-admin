@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   open: boolean;
 
   constructor(
+    @Inject(DOCUMENT) private document: Document,
     readonly identityService: IdentityService,
     private readonly router: Router,
   ) { }
@@ -62,15 +63,17 @@ export class HeaderComponent implements OnInit {
 
   toggleAside(): void {
     this.open = !this.open;
-    const sideBar = document.querySelector('.sidebar-left');
-    const mainContent = document.querySelector('.main-content-wrap');
-    if (!sideBar || !mainContent) { return; }
-    if (this.open) {
-      sideBar.classList.add('open');
-      mainContent.classList.add('sidenav-open');
+    const adminWrap = this.document.querySelector('.app-admin-wrap');
+    const mainContent = this.document.querySelector('.main-content-wrap');
+    if (!adminWrap || !mainContent) { return; }
+    if (!this.open) {
+      adminWrap.classList.add('sidebar-compact-onhover', 'sidebar-closed', 'sidebar-compact');
+      adminWrap.classList.remove('sidebar-full');
+      mainContent.classList.add('sidebar-full-z-index');
     } else {
-      sideBar.classList.remove('open');
-      mainContent.classList.remove('sidenav-open');
+      adminWrap.classList.remove('sidebar-compact-onhover', 'sidebar-closed', 'sidebar-compact');
+      adminWrap.classList.add('sidebar-full');
+      mainContent.classList.remove('sidebar-full-z-index');
     }
   }
 

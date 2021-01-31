@@ -1,0 +1,5 @@
+.main-content-wrap {
+  ::ng-deep .apexcharts-toolbar {
+    display: none !important;
+  }
+}

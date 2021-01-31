@@ -1,70 +1,32 @@
-<div class="side-content-wrap">
-  <div class="sidebar-left rtl-ps-none open">
-    <ul class="navigation-left">
-      <li class="nav-item">
-        <a class="nav-item-hold" routerLink="/dashboard">
-          <i class="nav-icon i-Bar-Chart"></i>
-          <span class="nav-text">{{ 'PNL_DASHBOARD' | translate }}</span>
-        </a>
-        <div class="triangle"></div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-item-hold" routerLink="/users">
-          <i class="nav-icon i-Administrator"></i>
-          <span class="nav-text">{{ 'USERS' | translate }}</span>
-        </a>
-        <div class="triangle"></div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-item-hold" routerLink="/transactions">
-          <i class="nav-icon i-Add-Cart"></i>
-          <span class="nav-text">{{ 'TRANSACTIONS' | translate }}</span>
-        </a>
-        <div class="triangle"></div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-item-hold" routerLink="/contact">
-          <i class="nav-icon i-Email"></i>
-          <span class="nav-text">{{ 'CONTACT_US' | translate }}</span>
-        </a>
-        <div class="triangle"></div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-item-hold" routerLink="/blog">
-          <i class="nav-icon i-Newspaper"></i>
-          <span class="nav-text">{{ 'BLOG' | translate }}</span>
-        </a>
-        <div class="triangle"></div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-item-hold" routerLink="/marketers">
-          <i class="nav-icon i-Add-UserStar"></i>
-          <span class="nav-text">{{ 'MARKETERS' | translate }}</span>
-        </a>
-        <div class="triangle"></div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-item-hold" routerLink="/errors">
-          <i class="nav-icon i-Security-Bug"></i>
-          <span class="nav-text">{{ 'ERRORS' | translate }}</span>
-        </a>
-        <div class="triangle"></div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-item-hold" routerLink="/discounts">
-          <i class="nav-icon i-Dollar-Sign-2"></i>
-          <span class="nav-text">{{ 'DISCOUNTS' | translate }}</span>
-        </a>
-        <div class="triangle"></div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-item-hold" routerLink="/plans">
-          <i class="nav-icon i-Billing"></i>
-          <span class="nav-text">{{ 'PLANS' | translate }}</span>
-        </a>
-        <div class="triangle"></div>
-      </li>
-    </ul>
+<div class="sidebar-panel bg-white no-select">
+  <div class="gull-brand pr-3 text-center mt-4 mb-2 d-flex justify-content-center align-items-center">
+    <img src="/assets/images/logo-colored.png" alt="">
   </div>
-  <div class="sidebar-overlay"></div>
+  <!--  user -->
+  <div class="scroll-nav">
+    <div class="side-nav">
+      <div class="main-menu">
+        <ul class="metismenu">
+          <li *ngFor="let m of menu" class="Ul_li--hover" [class.active]="m.active">
+            <a (click)="expand(m)" class="has-arrow" [routerLink]="m.path">
+              <i class="{{m.icon}}  text-20 mr-2 text-muted"></i>
+              <span class="item-name text-15 text-muted">
+                {{ m.text | translate}}
+              </span>
+            </a>
+            <ng-container *ngIf="m.children.length && m.expanded">
+              <ul class="mm-collapse">
+                <li *ngFor="let child of m.children" class="item-name" [class.active]="child.active">
+                  <a [routerLink]="child.path">
+                    <i class="{{child.icon}} mr-2 text-muted"></i>
+                    <span class="text-muted">{{ child.text | translate}}</span>
+                  </a>
+                </li>
+              </ul>
+            </ng-container>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,8 +1,11 @@
 .af-grid {
   overflow-x: auto;
+  background: #ffffff;
+  border-radius: 5px;
   .extra {
     display: flex;
     justify-content: space-between;
+    padding: 10px;
     .create {
       display: flex;
       width: 100px;

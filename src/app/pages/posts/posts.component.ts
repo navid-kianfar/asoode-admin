@@ -87,6 +87,15 @@ export class PostsComponent implements OnInit {
               textArea: true,
             },
           }),
+          this.formService.createInput({
+            config: { field: 'embedCode' },
+            params: {
+              model: '',
+              placeHolder: 'EMBED_CODE',
+              textArea: true,
+              ltr: true
+            },
+          }),
           this.formService.createEditor({
             config: { field: 'text' },
             params: {
