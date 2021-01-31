@@ -14,10 +14,9 @@ export class BlogService {
   async edit(id, model: any): Promise<OperationResult<boolean>> {
     return this.httpService.post<boolean>('/admin/blog/edit/' + id, model);
   }
-  async deletePost(id, model: any): Promise<OperationResult<boolean>> {
+  async deletePost(id): Promise<OperationResult<boolean>> {
     return this.httpService.post<boolean>(
-      `/admin/blog/post/delete/${id}`,
-      model,
+      `/admin/blog/post/delete/${id}`
     );
   }
   async post(id, model: any): Promise<OperationResult<boolean>> {

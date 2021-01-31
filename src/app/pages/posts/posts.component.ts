@@ -11,6 +11,7 @@ import { PromptComponent } from '../../modals/prompt/prompt.component';
 import { OperationResultStatus } from '../../library/core/enums';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { IdentityService } from '../../services/auth/identity.service';
+import { OperationResult } from '../../library/core/operation-result';
 
 @Component({
   selector: 'app-posts',
@@ -173,5 +174,17 @@ export class PostsComponent implements OnInit {
       .subscribe(() => {});
   }
 
-  prepareDelete(element: any) {}
+  prepareDelete(element: any) {
+    this.modalService
+      .confirm({ action: async () => OperationResult.Success(true) })
+      .subscribe(async confirmed => {
+        if (!confirmed) {
+          return;
+        }
+        const op = await this.blogService.deletePost(element.id);
+        if (op.status === OperationResultStatus.Success) {
+          this.commander.emit({ reload: true });
+        }
+      });
+  }
 }
