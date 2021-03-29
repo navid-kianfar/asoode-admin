@@ -1,7 +1,7 @@
 const domain = 'ciblsoft.com';
 
 export const environment = {
-  lang: 'fa',
+  lang: 'en',
   production: true,
   direct_endpoint: `https://${domain}`,
   api_endpoint: `https://api.${domain}/v2`,

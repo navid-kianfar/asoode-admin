@@ -1,7 +1,7 @@
 const domain = 'al-rahah.com';
 
 export const environment = {
-  lang: 'fa',
+  lang: 'ar',
   production: true,
   direct_endpoint: `https://${domain}`,
   api_endpoint: `https://api.${domain}/v2`,
